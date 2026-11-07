@@ -226,6 +226,24 @@
       pintarCarrito();
     });
 
+    $("[data-copiar]").addEventListener("click", async () => {
+      if (!carrito.length) return;
+      const texto = armarMensaje();
+      let copiado = false;
+      try {
+        await navigator.clipboard.writeText(texto);
+        copiado = true;
+      } catch (e) {
+        const area = document.createElement("textarea");
+        area.value = texto;
+        document.body.appendChild(area);
+        area.select();
+        try { copiado = document.execCommand("copy"); } catch (err) { /* sin portapapeles */ }
+        document.body.removeChild(area);
+      }
+      avisar(copiado ? "Pedido copiado. ¡Pegalo en tu mensaje!" : "No pudimos copiar el pedido en este navegador.");
+    });
+
     $("[data-enviar]").addEventListener("click", () => {
       if (!carrito.length) return;
       window.open(linkWhatsApp(armarMensaje()), "_blank", "noopener");
@@ -276,20 +294,36 @@
   /* ---------- Contacto y pie ---------- */
   function pintarContacto() {
     const saludo = "¡Hola COPLA! Quería hacerles una consulta.";
+    const hayWhatsApp = numeroWhatsApp() !== "";
     $$("[data-wa-link]").forEach((a) => { a.href = linkWhatsApp(saludo); });
-    $$("[data-wa-visible]").forEach((s) => { s.textContent = CONFIG.whatsappVisible || "[NÚMERO]"; });
+    $$("[data-wa-visible]").forEach((s) => { s.textContent = CONFIG.whatsappVisible || `+${numeroWhatsApp()}`; });
+    $("[data-wa-item]").hidden = !hayWhatsApp;
+    $("[data-wa-boton]").hidden = !hayWhatsApp;
 
     const ig = String(CONFIG.instagram || "").replace(/^@/, "").trim();
-    const igItem = $("[data-instagram-item]");
     if (ig) {
       $("[data-instagram-link]").href = `https://instagram.com/${encodeURIComponent(ig)}`;
       $("[data-instagram-texto]").textContent = `@${ig}`;
-    } else if (igItem) {
-      igItem.hidden = true;
     }
-    $("[data-entregas]").textContent = CONFIG.entregas || "";
+    $("[data-instagram-item]").hidden = !ig;
+    $("[data-pronto]").hidden = hayWhatsApp && !!ig;
+
+    $("[data-entregas]").innerHTML = zonasEntrega().map((z) => `<li>${escapar(z)}</li>`).join("");
     $("[data-anio]").textContent = new Date().getFullYear();
   }
+
+  function zonasEntrega() {
+    const e = CONFIG.entregas;
+    return (Array.isArray(e) ? e : [e]).filter(Boolean);
+  }
+
+  // Funciones que usa Copito (js/copito.js).
+  window.COPLA = {
+    abrirCarrito: () => $("[data-abrir-carrito]").click(),
+    zonasEntrega,
+    hayWhatsApp: () => numeroWhatsApp() !== "",
+    unidadesEnCarrito: () => calcularTotales().unidades,
+  };
 
   /* ---------- Aviso breve ---------- */
   let temporizador;
