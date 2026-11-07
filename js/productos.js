@@ -8,7 +8,7 @@
    Para agregar una FOTO: subí la imagen a la carpeta
      img/productos/ y escribí su nombre en "foto".
      Ejemplo: foto: "img/productos/empanadas.jpg"
-     Si "foto" está vacío se muestra a Copito, la mascota.
+     Si "foto" está vacío se muestra a Copo, la mascota.
 
    Para agregar un producto nuevo: copiá un bloque { ... },
      pegalo debajo y cambiá sus datos. El "id" no se puede

@@ -254,7 +254,11 @@
   function armarMensaje() {
     const form = $("[data-carrito-form]");
     const nombre = form.nombre.value.trim();
-    const zona = form.zona.value.trim();
+    const delivery = form.entrega.value === "delivery";
+    const direccion = form.direccion.value.trim();
+    const entrega = delivery
+      ? `Delivery${direccion ? ` a ${direccion}` : " (te paso la dirección)"}`
+      : `Retiro en ${form.retiro.value || "una de sus zonas"}`;
     const nota = form.nota.value.trim();
     const { total, faltanPrecios } = calcularTotales();
 
@@ -273,9 +277,9 @@
     } else {
       lineas.push(`*Total: ${precioTexto(total)}*`);
     }
-    if (nombre || zona || nota) lineas.push("");
+    lineas.push("");
     if (nombre) lineas.push(`Nombre: ${nombre}`);
-    if (zona) lineas.push(`Zona de entrega: ${zona}`);
+    lineas.push(`Entrega: ${entrega}`);
     if (nota) lineas.push(`Comentarios: ${nota}`);
     lineas.push("", "¿Coordinamos la entrega? ¡Gracias!");
     return lineas.join("\n");
@@ -306,21 +310,59 @@
       $("[data-instagram-texto]").textContent = `@${ig}`;
     }
     $("[data-instagram-item]").hidden = !ig;
-    $("[data-pronto]").hidden = hayWhatsApp && !!ig;
+    const pronto = $("[data-pronto]");
+    pronto.hidden = hayWhatsApp && !!ig;
+    if (hayWhatsApp && !ig) pronto.textContent = "Muy pronto también vas a encontrarnos en Instagram.";
 
-    $("[data-entregas]").innerHTML = zonasEntrega().map((z) => `<li>${escapar(z)}</li>`).join("");
+    const zonas = zonasRetiro().map((z) => z.nombre);
+    const partes = [];
+    if (zonas.length) partes.push(`Retiro en ${unirLista(zonas, "o")}`);
+    if (hayDelivery()) partes.push("delivery");
+    $("[data-entregas-resumen]").textContent = partes.length ? partes.join(", o ") + "." : "";
     $("[data-anio]").textContent = new Date().getFullYear();
   }
 
-  function zonasEntrega() {
-    const e = CONFIG.entregas;
-    return (Array.isArray(e) ? e : [e]).filter(Boolean);
+  function zonasRetiro() {
+    const e = CONFIG.entregas || {};
+    return (e.retiro || []).filter((z) => z && z.nombre);
   }
 
-  // Funciones que usa Copito (js/copito.js).
+  function hayDelivery() {
+    const d = (CONFIG.entregas || {}).delivery;
+    return !!(d && d.activo);
+  }
+
+  function unirLista(items, conector = "y") {
+    if (items.length < 2) return items.join("");
+    return items.slice(0, -1).join(", ") + ` ${conector} ` + items[items.length - 1];
+  }
+
+  // Formulario del carrito: retiro o delivery.
+  function prepararEntrega() {
+    const form = $("[data-carrito-form]");
+    const select = $("[data-select-retiro]");
+    const zonas = zonasRetiro();
+    select.innerHTML = zonas.map((z) => `<option>${escapar(z.nombre)}</option>`).join("");
+    if (!hayDelivery()) $("[data-opcion-delivery]").hidden = true;
+    if (!zonas.length) {
+      form.querySelector('input[value="retiro"]').closest("label").hidden = true;
+      form.querySelector('input[value="delivery"]').checked = true;
+    }
+    const actualizar = () => {
+      const delivery = form.entrega.value === "delivery";
+      $("[data-campo-retiro]").hidden = delivery || !zonas.length;
+      $("[data-campo-delivery]").hidden = !delivery;
+    };
+    form.addEventListener("change", actualizar);
+    actualizar();
+  }
+
+  // Funciones que usa Copo (js/asistente.js).
   window.COPLA = {
     abrirCarrito: () => $("[data-abrir-carrito]").click(),
-    zonasEntrega,
+    zonasRetiro,
+    hayDelivery,
+    unirLista,
     hayWhatsApp: () => numeroWhatsApp() !== "",
     unidadesEnCarrito: () => calcularTotales().unidades,
   };
@@ -337,6 +379,7 @@
 
   pintarTienda();
   pintarContacto();
+  prepararEntrega();
   enlazarCarrito();
   pintarCarrito();
 })();

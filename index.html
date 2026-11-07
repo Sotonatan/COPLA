@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
@@ -57,7 +58,6 @@
         <div class="hero-blob hero-blob-1"></div>
         <div class="hero-blob hero-blob-2"></div>
         <img class="hero-solluna" src="img/marca/sol-y-luna-crema.png" alt="" width="680" height="520">
-        <img class="hero-copo" src="img/copo/copo-postres.png" alt="Copo, el oso polar de COPLA, llevando una bandeja de postres" width="413" height="400">
         <span class="hero-sello">−18 °C</span>
       </div>
     </section>
@@ -65,10 +65,10 @@
     <!-- Cinta en movimiento -->
     <div class="cinta" aria-hidden="true">
       <div class="cinta-track">
-        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="copito">❄</span>
-        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="copito">❄</span>
-        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="copito">❄</span>
-        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="copito">❄</span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="asistente">❄</span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="asistente">❄</span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="asistente">❄</span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="asistente">❄</span>
       </div>
     </div>
 
@@ -106,12 +106,27 @@
       </ol>
     </section>
 
+    <!-- Retiro y delivery -->
+    <section class="zonas-seccion" id="zonas" aria-labelledby="titulo-zonas">
+      <div class="seccion-cabecera">
+        <p class="sobretitulo">Retiro y delivery</p>
+        <h2 id="titulo-zonas">¿Dónde está <em>tu pedido</em>?</h2>
+        <p>Podés retirarlo en una de nuestras zonas o pedirlo con delivery. La dirección exacta te la pasamos por WhatsApp cuando confirmamos el pedido.</p>
+      </div>
+      <div class="zonas-caja">
+        <div class="mapa" id="mapa" role="img" aria-label="Mapa con las zonas de retiro y delivery de COPLA">
+          <p class="mapa-cargando">Cargando mapa…</p>
+        </div>
+        <ul class="zonas-leyenda" data-zonas-leyenda></ul>
+      </div>
+    </section>
+
     <!-- Contacto -->
     <section class="contacto" id="contacto">
       <div class="contacto-texto">
         <p class="sobretitulo">Contacto</p>
         <h2>¿Charlamos?</h2>
-        <p>¿Tenés dudas, querés hacer un pedido grande para un evento o simplemente saludar? Estamos para ayudarte, y Copito también, con la bufanda puesta.</p>
+        <p>¿Tenés dudas, querés hacer un pedido grande para un evento o simplemente saludar? Estamos para ayudarte, y Copo también, con la bufanda puesta.</p>
         <ul class="contacto-datos">
           <li data-wa-item>
             <span class="dato-etiqueta">WhatsApp</span>
@@ -123,20 +138,17 @@
           </li>
           <li>
             <span class="dato-etiqueta">Entregas</span>
-            <ul class="zonas" data-entregas></ul>
+            <span><span data-entregas-resumen></span> <a href="#zonas" class="dato-mapa">Ver mapa</a></span>
           </li>
         </ul>
-        <p class="contacto-pronto" data-pronto hidden>Muy pronto vas a poder escribirnos por WhatsApp e Instagram. Mientras tanto, Copito te cuenta cómo hacer tu pedido.</p>
+        <p class="contacto-pronto" data-pronto hidden>Muy pronto vas a poder escribirnos por WhatsApp e Instagram. Mientras tanto, Copo te cuenta cómo hacer tu pedido.</p>
         <div class="contacto-botones">
           <a data-wa-link data-wa-boton href="#" target="_blank" rel="noopener" class="boton boton-naranja">Escribinos por WhatsApp</a>
-          <button type="button" class="boton boton-azul" data-abrir-copito>Hablar con Copito</button>
+          <button type="button" class="boton boton-azul" data-abrir-asistente>Hablar con Copo</button>
         </div>
       </div>
       <div class="contacto-copo">
-        <figure class="cartel">
-          <img src="img/copo/copo-cartel.png" alt="Copo sosteniendo un cartel" width="268" height="400">
-          <figcaption>¡Te<br>esperamos!</figcaption>
-        </figure>
+        <img class="contacto-avatar" src="img/marca/avatar-redes.jpg" alt="El sol y la luna de COPLA tomados de la mano" width="1080" height="1080" loading="lazy">
       </div>
     </section>
   </main>
@@ -162,8 +174,8 @@
       <button type="button" class="carrito-cerrar" data-cerrar-carrito aria-label="Cerrar carrito">✕</button>
     </div>
     <div class="carrito-vacio" data-carrito-vacio>
-      <img src="img/copo/copo-saludo.png" alt="" width="303" height="389">
-      <p>Tu carrito está vacío.<br>¡Copito te espera en la tienda!</p>
+      <img src="img/marca/sol-y-luna-turquesa.png" alt="" width="800" height="635">
+      <p>Tu carrito está vacío.<br>¡Te esperamos en la tienda!</p>
       <button type="button" class="boton boton-azul" data-ir-tienda>Ir a la tienda</button>
     </div>
     <ul class="carrito-lista" data-carrito-lista></ul>
@@ -172,8 +184,16 @@
         <label>Tu nombre
           <input type="text" name="nombre" autocomplete="name" placeholder="Ej.: Sofía">
         </label>
-        <label>Barrio o zona de entrega
-          <input type="text" name="zona" autocomplete="address-level2" placeholder="Ej.: Centro">
+        <fieldset class="entrega-elegir">
+          <legend>¿Cómo lo querés recibir?</legend>
+          <label class="entrega-opcion"><input type="radio" name="entrega" value="retiro" checked> Retiro</label>
+          <label class="entrega-opcion" data-opcion-delivery><input type="radio" name="entrega" value="delivery"> Delivery</label>
+        </fieldset>
+        <label data-campo-retiro>Zona de retiro
+          <select name="retiro" data-select-retiro></select>
+        </label>
+        <label data-campo-delivery hidden>Barrio o dirección de entrega
+          <input type="text" name="direccion" autocomplete="street-address" placeholder="Ej.: Barrio Centro">
         </label>
         <label>Comentarios (opcional)
           <textarea name="nota" rows="2" placeholder="Sabores, horarios, lo que necesites"></textarea>
@@ -195,9 +215,11 @@
 
   <div class="aviso-flotante" data-toast role="status" aria-live="polite"></div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/config.js"></script>
   <script src="js/productos.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/copito.js"></script>
+  <script src="js/mapa.js"></script>
+  <script src="js/asistente.js"></script>
 </body>
 </html>

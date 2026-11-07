@@ -1,7 +1,7 @@
 /* ==========================================================
    COPITO · asistente de la tienda
    ----------------------------------------------------------
-   Copito responde preguntas frecuentes con respuestas fijas
+   Copo responde preguntas frecuentes con respuestas fijas
    (no usa inteligencia artificial ni guarda datos).
    Para cambiar lo que dice, editá los textos de PREGUNTAS.
    ========================================================== */
@@ -12,11 +12,11 @@
   const AVATAR = "img/copo/copo-saludo.png";
 
   const SALUDO = [
-    "¡Hola! Soy Copito, el osito de COPLA 🐻‍❄️",
+    "¡Hola! Soy Copo, el oso polar de COPLA 🐻‍❄️",
     "Te ayudo a hacer tu pedido. ¿Qué querés saber?",
   ];
 
-  // Cada pregunta tiene un texto para el botón y la respuesta de Copito.
+  // Cada pregunta tiene un texto para el botón y la respuesta de Copo.
   // La respuesta puede ser una lista de mensajes o una función que la arma.
   const PREGUNTAS = [
     {
@@ -25,7 +25,7 @@
       respuesta: () => [
         "¡Es re fácil! Son 4 pasos:",
         "1️⃣ En la <b>Tienda</b>, elegí el producto, la presentación y la cantidad, y tocá <b>Agregar</b>.",
-        "2️⃣ Abrí el <b>Carrito</b> (arriba a la derecha) y revisá tu pedido. Podés dejar tu nombre, tu zona y algún comentario.",
+        "2️⃣ Abrí el <b>Carrito</b> (arriba a la derecha), revisá tu pedido y elegí si lo retirás o preferís delivery.",
         COPLA.hayWhatsApp && COPLA.hayWhatsApp()
           ? "3️⃣ Tocá <b>Enviar pedido por WhatsApp</b>: se abre una conversación con nosotros con tu pedido y el total ya escritos."
           : "3️⃣ Tocá <b>Enviar pedido por WhatsApp</b> y se arma el mensaje con tu pedido y el total. También podés tocar <b>Copiar pedido</b> y pegarlo donde quieras.",
@@ -37,14 +37,15 @@
       id: "entregas",
       boton: "¿Dónde entregan?",
       respuesta: () => {
-        const zonas = COPLA.zonasEntrega ? COPLA.zonasEntrega() : [];
-        if (!zonas.length) return ["Entregamos en varias zonas. Contanos dónde estás cuando hagas tu pedido y lo coordinamos."];
-        return [
-          "Por ahora entregamos en:",
-          zonas.map((z) => `📍 ${escapar(z)}`).join("<br>"),
-          "El día y el horario los coordinamos con vos cuando nos mandás el pedido.",
-        ];
+        const zonas = COPLA.zonasRetiro ? COPLA.zonasRetiro().map((z) => z.nombre) : [];
+        const lista = [];
+        if (zonas.length) lista.push(`📍 Podés <b>retirar</b> tu pedido en ${escapar(COPLA.unirLista(zonas, "o"))}. La dirección exacta te la pasamos por WhatsApp.`);
+        if (COPLA.hayDelivery && COPLA.hayDelivery()) lista.push("🛵 También hacemos <b>delivery</b>. En el mapa ves hasta dónde llegamos.");
+        if (!lista.length) lista.push("Contanos dónde estás cuando hagas tu pedido y coordinamos la entrega.");
+        lista.push("En el carrito elegís retiro o delivery, y el día y el horario los coordinamos con vos.");
+        return lista;
       },
+      acciones: ["mapa"],
     },
     {
       id: "precios",
@@ -75,6 +76,7 @@
 
   const ACCIONES = {
     tienda: { texto: "Ver la tienda", hacer: () => { cerrar(); document.getElementById("tienda").scrollIntoView({ behavior: "smooth" }); } },
+    mapa: { texto: "Ver el mapa", hacer: () => { cerrar(); document.getElementById("zonas").scrollIntoView({ behavior: "smooth" }); } },
     carrito: { texto: "Abrir mi carrito", hacer: () => { cerrar(); COPLA.abrirCarrito && COPLA.abrirCarrito(); } },
   };
 
@@ -84,35 +86,35 @@
 
   /* ---------- Interfaz ---------- */
   const raiz = document.createElement("div");
-  raiz.className = "copito";
+  raiz.className = "asistente";
   raiz.innerHTML = `
-    <div class="copito-burbuja" data-copito-burbuja hidden>
-      <button type="button" class="copito-burbuja-cerrar" aria-label="Ocultar mensaje" data-copito-ocultar>✕</button>
+    <div class="asistente-burbuja" data-asistente-burbuja hidden>
+      <button type="button" class="asistente-burbuja-cerrar" aria-label="Ocultar mensaje" data-asistente-ocultar>✕</button>
       <span>¡Hola! ¿Te ayudo con tu pedido?</span>
     </div>
-    <button type="button" class="copito-boton" data-copito-boton aria-expanded="false" aria-controls="copito-panel" aria-label="Abrir chat con Copito">
+    <button type="button" class="asistente-boton" data-asistente-boton aria-expanded="false" aria-controls="asistente-panel" aria-label="Abrir chat con Copo">
       <img src="${AVATAR}" alt="">
     </button>
-    <section class="copito-panel" id="copito-panel" aria-label="Chat con Copito" aria-hidden="true">
-      <header class="copito-cabecera">
+    <section class="asistente-panel" id="asistente-panel" aria-label="Chat con Copo" aria-hidden="true">
+      <header class="asistente-cabecera">
         <img src="${AVATAR}" alt="">
         <div>
-          <p class="copito-nombre">Copito</p>
-          <p class="copito-estado">Asistente de COPLA</p>
+          <p class="asistente-nombre">Copo</p>
+          <p class="asistente-estado">Asistente de COPLA</p>
         </div>
-        <button type="button" class="copito-cerrar" data-copito-cerrar aria-label="Cerrar chat">✕</button>
+        <button type="button" class="asistente-cerrar" data-asistente-cerrar aria-label="Cerrar chat">✕</button>
       </header>
-      <div class="copito-mensajes" data-copito-mensajes aria-live="polite"></div>
-      <div class="copito-opciones" data-copito-opciones></div>
+      <div class="asistente-mensajes" data-asistente-mensajes aria-live="polite"></div>
+      <div class="asistente-opciones" data-asistente-opciones></div>
     </section>`;
   document.body.appendChild(raiz);
 
   const $ = (s) => raiz.querySelector(s);
-  const panel = $("#copito-panel");
-  const botonAbrir = $("[data-copito-boton]");
-  const mensajes = $("[data-copito-mensajes]");
-  const opciones = $("[data-copito-opciones]");
-  const burbuja = $("[data-copito-burbuja]");
+  const panel = $("#asistente-panel");
+  const botonAbrir = $("[data-asistente-boton]");
+  const mensajes = $("[data-asistente-mensajes]");
+  const opciones = $("[data-asistente-opciones]");
+  const burbuja = $("[data-asistente-burbuja]");
   let iniciado = false;
   let ocupado = false;
 
@@ -135,7 +137,7 @@
 
   function agregarMensaje(html, quien) {
     const m = document.createElement("div");
-    m.className = `copito-msj copito-msj-${quien}`;
+    m.className = `asistente-msj asistente-msj-${quien}`;
     m.innerHTML = html;
     mensajes.appendChild(m);
     mensajes.scrollTop = mensajes.scrollHeight;
@@ -151,7 +153,7 @@
       const escribiendo = agregarMensaje("<span></span><span></span><span></span>", "escribiendo");
       await esperar(sinMovimiento ? 0 : Math.min(400 + texto.length * 8, 1100));
       escribiendo.remove();
-      agregarMensaje(texto, "copito");
+      agregarMensaje(texto, "asistente");
     }
     ocupado = false;
   }
@@ -162,7 +164,7 @@
       const accion = ACCIONES[clave];
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "copito-opcion copito-opcion-accion";
+      b.className = "asistente-opcion asistente-opcion-accion";
       b.textContent = accion.texto;
       b.addEventListener("click", accion.hacer);
       opciones.appendChild(b);
@@ -170,7 +172,7 @@
     PREGUNTAS.forEach((p) => {
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "copito-opcion";
+      b.className = "asistente-opcion";
       b.textContent = p.boton;
       b.addEventListener("click", () => responder(p));
       opciones.appendChild(b);
@@ -189,19 +191,19 @@
   }
 
   botonAbrir.addEventListener("click", () => (raiz.classList.contains("abierto") ? cerrar() : abrir()));
-  $("[data-copito-cerrar]").addEventListener("click", cerrar);
-  $("[data-copito-ocultar]").addEventListener("click", (e) => { e.stopPropagation(); burbuja.hidden = true; });
+  $("[data-asistente-cerrar]").addEventListener("click", cerrar);
+  $("[data-asistente-ocultar]").addEventListener("click", (e) => { e.stopPropagation(); burbuja.hidden = true; });
   burbuja.addEventListener("click", abrir);
-  document.querySelectorAll("[data-abrir-copito]").forEach((b) => b.addEventListener("click", abrir));
+  document.querySelectorAll("[data-abrir-asistente]").forEach((b) => b.addEventListener("click", abrir));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") cerrar(); });
 
   // Saludo breve unos segundos después de entrar (una vez por visita).
   let yaSaludo = false;
-  try { yaSaludo = sessionStorage.getItem("copito-saludo") === "1"; } catch (e) { /* sin almacenamiento */ }
+  try { yaSaludo = sessionStorage.getItem("asistente-saludo") === "1"; } catch (e) { /* sin almacenamiento */ }
   if (!yaSaludo) {
     setTimeout(() => {
       if (!iniciado) burbuja.hidden = false;
-      try { sessionStorage.setItem("copito-saludo", "1"); } catch (e) { /* sin almacenamiento */ }
+      try { sessionStorage.setItem("asistente-saludo", "1"); } catch (e) { /* sin almacenamiento */ }
     }, 2500);
   }
 })();

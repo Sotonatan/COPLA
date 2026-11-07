@@ -9,7 +9,7 @@ Es un sitio estático (HTML, CSS y JavaScript, sin instalaciones), listo para pu
 | Quiero cambiar… | Archivo |
 | --- | --- |
 | Número de WhatsApp, Instagram, zonas de entrega | `js/config.js` |
-| Lo que responde Copito, el asistente | `js/copito.js` |
+| Lo que responde Copo, el asistente | `js/asistente.js` |
 | Precios, productos, presentaciones, descripciones | `js/productos.js` |
 | Fotos de productos | carpeta `img/productos/` + `js/productos.js` |
 | Textos de la portada, pasos y contacto | `index.html` |
@@ -47,13 +47,20 @@ Mientras esté vacío:
 - La sección Contacto oculta WhatsApp y avisa que el canal llega pronto (lo mismo con Instagram).
 - El botón del carrito abre WhatsApp y el cliente elige a quién mandarle el mensaje. También puede tocar **Copiar pedido** y pegarlo donde quiera.
 
-### Zonas de entrega
+### Retiro y delivery (mapa)
 
-En `js/config.js`, la lista `entregas` tiene una zona por línea. Copito y la sección Contacto la muestran automáticamente.
+En `js/config.js`, dentro de `entregas`:
 
-### Copito, el asistente
+- `retiro`: cada zona de retiro con su nombre, su ubicación (`lat` y `lng`) y el tamaño del círculo en metros (`radio`). El mapa muestra un círculo aproximado, nunca la dirección exacta.
+- `delivery`: el centro y el radio en km de la zona de delivery. Con `activo: false` se oculta.
 
-El botón con el osito abajo a la derecha abre un chat donde Copito explica cómo comprar, dónde entregan, los precios y cómo conservar los productos. Tiene respuestas fijas (no usa inteligencia artificial). Para cambiar los textos o sumar preguntas, editá la lista `PREGUNTAS` en `js/copito.js`.
+Para sacar `lat` y `lng`: en Google Maps hacé clic derecho cerca del lugar y tocá los números que aparecen arriba (se copian). El primero es `lat` y el segundo `lng`.
+
+El mapa usa Leaflet y mapas de OpenStreetMap/CARTO, gratis y sin clave. En el carrito, el cliente elige retiro (y la zona) o delivery (y su barrio o dirección), y eso viaja en el mensaje de WhatsApp.
+
+### Copo, el asistente
+
+El botón con el osito abajo a la derecha abre un chat donde Copo explica cómo comprar, dónde retirar o pedir delivery, los precios y cómo conservar los productos. Tiene respuestas fijas (no usa inteligencia artificial). Para cambiar los textos o sumar preguntas, editá la lista `PREGUNTAS` en `js/asistente.js`.
 
 ## Ver la web en tu compu
 
@@ -73,7 +80,8 @@ css/estilos.css     estilos con la paleta de COPLA
 js/config.js        datos del negocio
 js/productos.js     catálogo
 js/app.js           tienda, carrito y mensaje de WhatsApp
-js/copito.js        chat de Copito con preguntas frecuentes
+js/asistente.js     chat de Copo con preguntas frecuentes
+js/mapa.js          mapa de retiro y delivery
 img/marca/          logo, sol y luna, íconos
 img/copo/           Copo, la mascota, en sus distintas poses
 img/productos/      fotos de productos (vacía por ahora)
