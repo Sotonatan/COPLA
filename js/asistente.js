@@ -25,7 +25,7 @@
       respuesta: () => [
         "¡Es re fácil! Son 4 pasos:",
         "1️⃣ En la <b>Tienda</b>, elegí el producto, la presentación y la cantidad, y tocá <b>Agregar</b>.",
-        "2️⃣ Abrí el <b>Carrito</b> (arriba a la derecha), revisá tu pedido y elegí si lo retirás o preferís delivery.",
+        "2️⃣ Abrí el <b>Carrito</b> (arriba a la derecha), revisá tu pedido y elegí si lo retirás o preferís que te lo llevemos.",
         COPLA.hayWhatsApp && COPLA.hayWhatsApp()
           ? "3️⃣ Tocá <b>Enviar pedido por WhatsApp</b>: se abre una conversación con nosotros con tu pedido y el total ya escritos."
           : "3️⃣ Tocá <b>Enviar pedido por WhatsApp</b> y se arma el mensaje con tu pedido y el total. También podés tocar <b>Copiar pedido</b> y pegarlo donde quieras.",
@@ -39,10 +39,10 @@
       respuesta: () => {
         const zonas = COPLA.zonasRetiro ? COPLA.zonasRetiro().map((z) => z.nombre) : [];
         const lista = [];
-        if (zonas.length) lista.push(`📍 Podés <b>retirar</b> tu pedido en ${escapar(COPLA.unirLista(zonas, "o"))}. La dirección exacta te la pasamos por WhatsApp.`);
-        if (COPLA.hayDelivery && COPLA.hayDelivery()) lista.push("🛵 También hacemos <b>delivery</b>. En el mapa ves hasta dónde llegamos.");
+        if (zonas.length) lista.push(`📍 En ${escapar(COPLA.unirLista(zonas, "o"))} podés <b>retirar</b> tu pedido o te lo llevamos <b>gratis</b> si estás dentro de ${escapar(COPLA.textoZonaGratis())}. La dirección exacta te la pasamos por WhatsApp.`);
+        if (COPLA.hayDelivery && COPLA.hayDelivery()) lista.push("🛵 Si estás más lejos, también te lo llevamos. En ese caso el costo del envío corre por tu cuenta.");
         if (!lista.length) lista.push("Contanos dónde estás cuando hagas tu pedido y coordinamos la entrega.");
-        lista.push("En el carrito elegís retiro o delivery, y el día y el horario los coordinamos con vos.");
+        lista.push("En el carrito elegís retiro o envío, y el día y el horario los coordinamos con vos.");
         return lista;
       },
       acciones: ["mapa"],

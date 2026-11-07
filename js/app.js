@@ -254,10 +254,10 @@
   function armarMensaje() {
     const form = $("[data-carrito-form]");
     const nombre = form.nombre.value.trim();
-    const delivery = form.entrega.value === "delivery";
+    const delivery = form.entrega.value === "envio";
     const direccion = form.direccion.value.trim();
     const entrega = delivery
-      ? `Delivery${direccion ? ` a ${direccion}` : " (te paso la dirección)"}`
+      ? `Envío a domicilio${direccion ? ` a ${direccion}` : " (te paso la dirección)"}`
       : `Retiro en ${form.retiro.value || "una de sus zonas"}`;
     const nota = form.nota.value.trim();
     const { total, faltanPrecios } = calcularTotales();
@@ -314,17 +314,13 @@
     pronto.hidden = hayWhatsApp && !!ig;
     if (hayWhatsApp && !ig) pronto.textContent = "Muy pronto también vas a encontrarnos en Instagram.";
 
-    const zonas = zonasRetiro().map((z) => z.nombre);
-    const partes = [];
-    if (zonas.length) partes.push(`Retiro en ${unirLista(zonas, "o")}`);
-    if (hayDelivery()) partes.push("delivery");
-    $("[data-entregas-resumen]").textContent = partes.length ? partes.join(", o ") + "." : "";
+    $("[data-entregas-resumen]").textContent = resumenEntregas();
     $("[data-anio]").textContent = new Date().getFullYear();
   }
 
   function zonasRetiro() {
     const e = CONFIG.entregas || {};
-    return (e.retiro || []).filter((z) => z && z.nombre);
+    return (e.zonas || []).filter((z) => z && z.nombre);
   }
 
   function hayDelivery() {
@@ -332,9 +328,21 @@
     return !!(d && d.activo);
   }
 
+  function textoZonaGratis() {
+    return (CONFIG.entregas || {}).zonaGratis || "nuestras zonas";
+  }
+
   function unirLista(items, conector = "y") {
     if (items.length < 2) return items.join("");
     return items.slice(0, -1).join(", ") + ` ${conector} ` + items[items.length - 1];
+  }
+
+  function resumenEntregas() {
+    const zonas = zonasRetiro().map((z) => z.nombre);
+    const partes = [];
+    if (zonas.length) partes.push(`Retiro y entrega gratis en ${unirLista(zonas, "o")} (${textoZonaGratis()}).`);
+    if (hayDelivery()) partes.push("Más lejos, delivery con envío a cargo del cliente.");
+    return partes.join(" ");
   }
 
   // Formulario del carrito: retiro o delivery.
@@ -343,16 +351,19 @@
     const select = $("[data-select-retiro]");
     const zonas = zonasRetiro();
     select.innerHTML = zonas.map((z) => `<option>${escapar(z.nombre)}</option>`).join("");
-    if (!hayDelivery()) $("[data-opcion-delivery]").hidden = true;
     if (!zonas.length) {
       form.querySelector('input[value="retiro"]').closest("label").hidden = true;
-      form.querySelector('input[value="delivery"]').checked = true;
+      form.querySelector('input[value="envio"]').checked = true;
     }
     const actualizar = () => {
-      const delivery = form.entrega.value === "delivery";
+      const delivery = form.entrega.value === "envio";
       $("[data-campo-retiro]").hidden = delivery || !zonas.length;
       $("[data-campo-delivery]").hidden = !delivery;
     };
+    const nombres = unirLista(zonas.map((z) => z.nombre), "o");
+    $("[data-ayuda-envio]").textContent = zonas.length
+      ? `Gratis dentro de ${textoZonaGratis()} de ${nombres}.${hayDelivery() ? " Más lejos, el envío corre por tu cuenta." : ""}`
+      : "";
     form.addEventListener("change", actualizar);
     actualizar();
   }
@@ -363,6 +374,7 @@
     zonasRetiro,
     hayDelivery,
     unirLista,
+    textoZonaGratis,
     hayWhatsApp: () => numeroWhatsApp() !== "",
     unidadesEnCarrito: () => calcularTotales().unidades,
   };

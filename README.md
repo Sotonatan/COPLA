@@ -47,16 +47,17 @@ Mientras esté vacío:
 - La sección Contacto oculta WhatsApp y avisa que el canal llega pronto (lo mismo con Instagram).
 - El botón del carrito abre WhatsApp y el cliente elige a quién mandarle el mensaje. También puede tocar **Copiar pedido** y pegarlo donde quiera.
 
-### Retiro y delivery (mapa)
+### Zonas de retiro y entrega gratis (mapa)
 
 En `js/config.js`, dentro de `entregas`:
 
-- `retiro`: cada zona de retiro con su nombre, su ubicación (`lat` y `lng`) y el tamaño del círculo en metros (`radio`). El mapa muestra un círculo aproximado, nunca la dirección exacta.
-- `delivery`: el centro y el radio en km de la zona de delivery. Con `activo: false` se oculta.
+- `zonas`: cada zona con su nombre, su ubicación (`lat` y `lng`) y el tamaño del círculo en metros (`radio`; 5 cuadras ≈ 600 m). Dentro del círculo se puede retirar el pedido o recibirlo gratis. El mapa nunca muestra la dirección exacta.
+- `zonaGratis`: el texto que explica el alcance ("5 cuadras a la redonda").
+- `delivery`: el texto para quienes están más lejos (envío a cargo del cliente). No se dibuja en el mapa. Con `activo: false` se oculta.
 
-Para sacar `lat` y `lng`: en Google Maps hacé clic derecho cerca del lugar y tocá los números que aparecen arriba (se copian). El primero es `lat` y el segundo `lng`.
+Para sacar `lat` y `lng`: en Google Maps hacé clic derecho sobre el lugar y tocá los números que aparecen arriba (se copian). El primero es `lat` y el segundo `lng`.
 
-El mapa usa Leaflet y mapas de OpenStreetMap/CARTO, gratis y sin clave. En el carrito, el cliente elige retiro (y la zona) o delivery (y su barrio o dirección), y eso viaja en el mensaje de WhatsApp.
+El mapa usa Leaflet y mapas de OpenStreetMap/CARTO, gratis y sin clave. En el carrito, el cliente elige retiro (y la zona) o envío a domicilio (y su dirección), y eso viaja en el mensaje de WhatsApp.
 
 ### Copo, el asistente
 
@@ -81,7 +82,7 @@ js/config.js        datos del negocio
 js/productos.js     catálogo
 js/app.js           tienda, carrito y mensaje de WhatsApp
 js/asistente.js     chat de Copo con preguntas frecuentes
-js/mapa.js          mapa de retiro y delivery
+js/mapa.js          mapa de zonas de retiro y entrega gratis
 img/marca/          logo, sol y luna, íconos
 img/copo/           Copo, la mascota, en sus distintas poses
 img/productos/      fotos de productos (vacía por ahora)

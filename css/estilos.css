@@ -499,7 +499,8 @@ em { font-style: italic; }
 .leyenda-item { display: flex; gap: 14px; align-items: flex-start; }
 .leyenda-marca { flex: none; width: 30px; height: 30px; border-radius: 50%; margin-top: 2px; }
 .leyenda-retiro { background: rgba(237, 99, 53, .4); border: 3px solid var(--naranja); }
-.leyenda-delivery { background: rgba(141, 181, 172, .5); border: 2px dashed var(--azul); }
+.leyenda-delivery { background: var(--crema); border: 2px solid var(--azul); display: grid; place-items: center; font-size: .95rem; }
+.campo-ayuda { font-size: .8rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--naranja); }
 .leyenda-titulo { margin: 0; font-family: var(--titulos); font-weight: 700; font-size: 1.2rem; line-height: 1.2; }
 .leyenda-texto { margin: 2px 0 0; font-size: .92rem; }
 .dato-mapa { margin-left: 6px; font-weight: 600; color: var(--naranja); }

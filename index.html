@@ -109,12 +109,12 @@
     <!-- Retiro y delivery -->
     <section class="zonas-seccion" id="zonas" aria-labelledby="titulo-zonas">
       <div class="seccion-cabecera">
-        <p class="sobretitulo">Retiro y delivery</p>
+        <p class="sobretitulo">Retiro y entrega</p>
         <h2 id="titulo-zonas">¿Dónde está <em>tu pedido</em>?</h2>
-        <p>Podés retirarlo en una de nuestras zonas o pedirlo con delivery. La dirección exacta te la pasamos por WhatsApp cuando confirmamos el pedido.</p>
+        <p>Si estás dentro de una de nuestras zonas, podés retirarlo o te lo llevamos gratis. La dirección exacta te la pasamos por WhatsApp cuando confirmamos el pedido.</p>
       </div>
       <div class="zonas-caja">
-        <div class="mapa" id="mapa" role="img" aria-label="Mapa con las zonas de retiro y delivery de COPLA">
+        <div class="mapa" id="mapa" role="img" aria-label="Mapa con las zonas de retiro y entrega gratis de COPLA">
           <p class="mapa-cargando">Cargando mapa…</p>
         </div>
         <ul class="zonas-leyenda" data-zonas-leyenda></ul>
@@ -187,13 +187,14 @@
         <fieldset class="entrega-elegir">
           <legend>¿Cómo lo querés recibir?</legend>
           <label class="entrega-opcion"><input type="radio" name="entrega" value="retiro" checked> Retiro</label>
-          <label class="entrega-opcion" data-opcion-delivery><input type="radio" name="entrega" value="delivery"> Delivery</label>
+          <label class="entrega-opcion"><input type="radio" name="entrega" value="envio"> Envío a domicilio</label>
         </fieldset>
         <label data-campo-retiro>Zona de retiro
           <select name="retiro" data-select-retiro></select>
         </label>
-        <label data-campo-delivery hidden>Barrio o dirección de entrega
-          <input type="text" name="direccion" autocomplete="street-address" placeholder="Ej.: Barrio Centro">
+        <label data-campo-delivery hidden>Dirección de entrega
+          <input type="text" name="direccion" autocomplete="street-address" placeholder="Calle, número y barrio">
+          <span class="campo-ayuda" data-ayuda-envio></span>
         </label>
         <label>Comentarios (opcional)
           <textarea name="nota" rows="2" placeholder="Sabores, horarios, lo que necesites"></textarea>

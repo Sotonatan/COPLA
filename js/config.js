@@ -19,25 +19,26 @@ window.COPLA_CONFIG = {
   // Usuario de Instagram, sin "@". Dejalo vacío para ocultarlo.
   instagram: "",
 
-  // RETIRO Y DELIVERY
-  // Las zonas se dibujan en el mapa como círculos aproximados, para no
-  // mostrar la dirección exacta. Para mover una zona:
-  //   1. Abrí Google Maps y hacé clic derecho cerca del lugar.
+  // RETIRO Y ENTREGA GRATIS
+  // Cada zona se dibuja en el mapa como un círculo, sin mostrar la
+  // dirección exacta. Dentro del círculo se puede retirar el pedido o
+  // recibirlo gratis.
+  // Para mover una zona:
+  //   1. Abrí Google Maps y hacé clic derecho sobre el lugar.
   //   2. Tocá los números que aparecen arriba (se copian).
   //   3. Pegalos en lat (el primero) y lng (el segundo).
-  // "radio" es el tamaño del círculo en metros.
+  // "radio" es el tamaño del círculo en metros (5 cuadras ≈ 600 m).
   entregas: {
-    retiro: [
-      { nombre: "zona Ameghino", lat: -27.4690, lng: -58.9760, radio: 450 },
-      { nombre: "zona Perón", lat: -27.4510, lng: -58.9990, radio: 450 },
+    zonaGratis: "5 cuadras a la redonda",
+    zonas: [
+      { nombre: "zona Perón", lat: -27.4438, lng: -58.9982, radio: 600 },
+      { nombre: "zona Ameghino", lat: -27.4650, lng: -58.9775, radio: 600 },
     ],
-    // Delivery: un círculo alrededor de "centro" con el radio en km.
+    // Delivery fuera de las zonas: no se marca en el mapa.
     // Poné activo: false para ocultarlo.
     delivery: {
       activo: true,
-      centro: { lat: -27.4600, lng: -58.9875 },
-      radioKm: 3,
-      texto: "Llevamos tu pedido a domicilio dentro de esta zona. Si estás un poco más lejos, consultanos.",
+      texto: "Fuera de estas zonas también te lo llevamos. El costo del envío corre por tu cuenta.",
     },
   },
 
