@@ -326,6 +326,10 @@
       enlaceIg.classList.add("acceso-pronto");
       $("[data-instagram-texto]").textContent = "Muy pronto";
     }
+    const fb = String(CONFIG.facebook || "").trim();
+    if (fb) $("[data-facebook-link]").href = fb;
+    $("[data-facebook-item]").hidden = !fb;
+
     $("[data-anio]").textContent = new Date().getFullYear();
   }
 

@@ -532,7 +532,7 @@ em { font-style: italic; }
 .franja span { width: 16px; height: 16px; display: block; }
 
 /* ---------- Contacto: accesos con íconos ---------- */
-.contacto-accesos { list-style: none; padding: 0; margin: 24px 0 26px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 560px; }
+.contacto-accesos { list-style: none; padding: 0; margin: 24px 0 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 12px; max-width: 600px; }
 .acceso {
   display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
   background: var(--blanco); border: 2px solid var(--azul); border-radius: 22px;
@@ -544,10 +544,15 @@ a.acceso[href]:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--az
 .acceso-icono .icono { width: 28px; height: 28px; }
 .acceso-wa { background: var(--wa); }
 .acceso-ig { background: var(--rosa); }
+.acceso-fb { background: #1877F2; }
 .acceso-moto { background: var(--naranja); }
 .acceso-texto { display: grid; gap: 2px; line-height: 1.2; }
 .acceso-etiqueta { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; opacity: .75; }
 .acceso-pronto { cursor: default; opacity: .8; }
+.contacto-texto { min-width: 0; }
+@media (max-width: 640px) {
+  .contacto-accesos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 420px) {
   .contacto-accesos { gap: 8px; }
   .acceso { padding: 12px 6px; font-size: .9rem; }

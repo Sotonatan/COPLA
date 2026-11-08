@@ -19,6 +19,9 @@ window.COPLA_CONFIG = {
   // Usuario de Instagram, sin "@". Dejalo vacío para ocultarlo.
   instagram: "",
 
+  // Página de Facebook (link completo). Dejalo vacío para ocultarla.
+  facebook: "https://www.facebook.com/profile.php?id=61596291213937",
+
   // PUNTOS DE ENTREGA
   // Cada punto se marca en el mapa con un pin y un círculo alrededor.
   // Dentro del círculo se puede retirar el pedido o recibirlo gratis.
