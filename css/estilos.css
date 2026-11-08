@@ -402,7 +402,7 @@ em { font-style: italic; }
 /* ---------- Copo (chat) ---------- */
 .asistente { position: fixed; right: 18px; bottom: 18px; z-index: 45; }
 .asistente-boton {
-  width: 72px; height: 72px; border-radius: 50%; padding: 0;
+  width: 96px; height: 96px; border-radius: 50%; padding: 0;
   background: var(--verde); border: 3px solid var(--azul);
   display: grid; place-items: end center; overflow: hidden;
   box-shadow: 0 8px 22px rgba(8, 76, 115, .35);
@@ -413,7 +413,7 @@ em { font-style: italic; }
 .asistente.abierto .asistente-boton { transform: scale(.9); }
 
 .asistente-burbuja {
-  position: absolute; right: 4px; bottom: 86px; width: 220px;
+  position: absolute; right: 4px; bottom: 110px; width: 220px;
   background: var(--blanco); border: 2px solid var(--azul); border-radius: 18px 18px 4px 18px;
   padding: 12px 34px 12px 14px; font-size: .92rem; font-weight: 500; cursor: pointer;
   box-shadow: 0 6px 0 rgba(8, 76, 115, .12);
@@ -426,8 +426,8 @@ em { font-style: italic; }
 @keyframes aparecer { from { opacity: 0; transform: translateY(8px); } }
 
 .asistente-panel {
-  position: absolute; right: 0; bottom: 88px;
-  width: min(370px, calc(100vw - 36px)); height: min(560px, calc(100vh - 140px));
+  position: absolute; right: 0; bottom: 112px;
+  width: min(370px, calc(100vw - 36px)); height: min(560px, calc(100vh - 160px));
   background: var(--crema); border: 2px solid var(--azul); border-radius: 24px;
   display: flex; flex-direction: column; overflow: hidden;
   box-shadow: 0 16px 40px rgba(8, 76, 115, .3);
@@ -471,10 +471,10 @@ em { font-style: italic; }
 
 @media (max-width: 640px) {
   .asistente { right: 14px; bottom: 14px; }
-  .asistente-boton { width: 60px; height: 60px; }
-  .asistente-panel { bottom: 74px; height: min(540px, calc(100vh - 110px)); }
-  .asistente-burbuja { bottom: 72px; }
-  .carrito-flotante { right: 88px; left: 14px; bottom: 18px; }
+  .asistente-boton { width: 80px; height: 80px; }
+  .asistente-panel { bottom: 94px; height: min(540px, calc(100vh - 130px)); }
+  .asistente-burbuja { bottom: 92px; }
+  .carrito-flotante { right: 108px; left: 14px; bottom: 24px; }
 }
 
 /* ---------- Retiro y delivery ---------- */
