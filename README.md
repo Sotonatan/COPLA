@@ -57,7 +57,7 @@ En `js/config.js`, dentro de `entregas`:
 
 Para sacar `lat` y `lng`: en Google Maps hacé clic derecho sobre el lugar y tocá los números que aparecen arriba (se copian). El primero es `lat` y el segundo `lng`.
 
-El mapa usa Leaflet y mapas de OpenStreetMap/CARTO, gratis y sin clave. En el carrito, el cliente elige retiro (y la zona) o envío a domicilio (y su dirección), y eso viaja en el mensaje de WhatsApp.
+El mapa usa Leaflet y mapas de OpenStreetMap, gratis y sin clave. En el carrito, el cliente elige retiro (y la zona) o envío a domicilio (y su dirección), y eso viaja en el mensaje de WhatsApp.
 
 ### Copo, el asistente
 
