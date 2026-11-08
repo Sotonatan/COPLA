@@ -474,7 +474,7 @@ em { font-style: italic; }
   .asistente-boton { width: 80px; height: 80px; }
   .asistente-panel { bottom: 94px; height: min(540px, calc(100vh - 130px)); }
   .asistente-burbuja { bottom: 92px; }
-  .carrito-flotante { right: 108px; left: 14px; bottom: 24px; }
+  .carrito-flotante { right: 108px; left: 14px; bottom: 24px; font-size: .82rem; letter-spacing: .04em; white-space: nowrap; padding: 14px 10px; }
 }
 
 /* ---------- Retiro y delivery ---------- */
