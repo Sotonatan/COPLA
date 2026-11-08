@@ -67,11 +67,11 @@ El botón con el osito abajo a la derecha abre un chat donde Copo explica cómo 
 
 Abrí `index.html` con doble clic en el navegador. No hace falta servidor.
 
-## Publicar con GitHub Pages
+## Dónde está publicada
 
-1. En GitHub, entrá a **Settings → Pages**.
-2. En **Build and deployment**, elegí **Deploy from a branch**, rama `main` y carpeta `/ (root)`.
-3. Guardá. En un par de minutos la web queda en `https://sotonatan.github.io/COPLA/`.
+La web está en **https://coplacongelados.netlify.app/**. Netlify toma los archivos de la rama del repo y la actualiza sola cada vez que se sube un cambio (tarda uno o dos minutos).
+
+Después de cambiar CSS o JS, subí el número `?v=` de los enlaces en `index.html` para que los navegadores no muestren la versión vieja.
 
 ## Estructura
 
