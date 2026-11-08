@@ -81,6 +81,7 @@
           <h3>${escapar(p.nombre)}</h3>
           <div class="tarjeta-imagen${p.foto ? " con-foto" : ""}">${imagen}</div>
           <p class="tarjeta-desc">${escapar(p.descripcion || "")}</p>
+          ${p.conservacion ? `<details class="tarjeta-conservacion"><summary>Cómo conservarlos</summary><p>${escapar(p.conservacion)}</p></details>` : ""}
           ${opciones}
           ${sabores}
           <div class="tarjeta-acciones">

@@ -39,6 +39,10 @@ Mientras `foto` esté vacío, la tarjeta muestra a Copo con el color del product
 
 Si un producto tiene sabores para elegir (por ejemplo empanadas), completá `sabores: ["Carne", "Pollo", "Jamón y queso"]` y aparece un selector.
 
+### Conservación
+
+Si un producto tiene indicaciones de conservación, completá `conservacion: "..."` y la tarjeta muestra un botón **Cómo conservarlos** que despliega el texto.
+
 ### WhatsApp
 
 En `js/config.js`, completá `whatsapp` solo con dígitos y el código de país, por ejemplo `"5491112345678"`.

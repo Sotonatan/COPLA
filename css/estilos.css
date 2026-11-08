@@ -207,6 +207,9 @@ em { font-style: italic; }
 .tarjeta:hover .tarjeta-copo { transform: rotate(-4deg) scale(1.04); }
 .tarjeta-foto { width: 100%; height: 100%; object-fit: cover; }
 .tarjeta-desc { margin: 0 0 16px; font-size: .95rem; text-align: center; color: rgba(8, 76, 115, .85); }
+.tarjeta-conservacion { margin: -6px 0 16px; background: rgba(255, 252, 247, .7); border: 1.5px dashed rgba(8, 76, 115, .35); border-radius: 14px; padding: 8px 12px; font-size: .88rem; }
+.tarjeta-conservacion summary { cursor: pointer; font-weight: 600; text-align: center; color: var(--azul); }
+.tarjeta-conservacion p { margin: 8px 0 2px; text-align: center; line-height: 1.45; }
 
 .opciones { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 16px; }
 .opcion {

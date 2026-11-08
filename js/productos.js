@@ -99,6 +99,7 @@ window.COPLA_PRODUCTOS = [
     foto: "img/productos/postres.jpg",
     copo: "img/copo/copo-postres.png",
     etiqueta: "",
+    conservacion: "Conservar congelado a −18 °C. Consumir antes de 60 días. Descongelar en heladera. Una vez descongelado, consumir dentro de las 48 h. No recongelar.",
     sabores: [],
     opciones: [
       { nombre: "Cheesecake · 200 ml", precio: null },
