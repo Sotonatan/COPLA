@@ -566,6 +566,6 @@ a.acceso[href]:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--az
 /* ---------- Fotos de productos y Próximamente ---------- */
 .tarjeta-imagen.con-foto { aspect-ratio: 3 / 2; background-image: none; }
 .proximamente { max-width: var(--ancho); margin: 0 auto; padding: 24px 16px 56px; }
-.tarjeta-pronto .tarjeta-etiqueta { background: var(--azul); }
+.tarjeta-pronto .tarjeta-etiqueta { background: var(--rosa); }
 .tarjeta-pronto .tarjeta-desc { margin-bottom: 4px; }
 .tarjeta-pronto:hover { box-shadow: 0 10px 0 var(--tono); }
