@@ -319,7 +319,7 @@
     const enlaceIg = $("[data-instagram-link]");
     if (ig) {
       enlaceIg.href = `https://instagram.com/${encodeURIComponent(ig)}`;
-      $("[data-instagram-texto]").textContent = `@${ig}`;
+      $("[data-instagram-texto]").textContent = "Seguinos";
     } else {
       enlaceIg.removeAttribute("href");
       enlaceIg.removeAttribute("target");

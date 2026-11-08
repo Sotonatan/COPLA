@@ -17,7 +17,7 @@ window.COPLA_CONFIG = {
   whatsappVisible: "+54 9 362 532-0932",
 
   // Usuario de Instagram, sin "@". Dejalo vacío para ocultarlo.
-  instagram: "",
+  instagram: "coplacongelados",
 
   // Página de Facebook (link completo). Dejalo vacío para ocultarla.
   facebook: "https://www.facebook.com/profile.php?id=61596291213937",
