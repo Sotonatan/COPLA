@@ -30,6 +30,7 @@
           ? "3️⃣ Tocá <b>Enviar pedido por WhatsApp</b>: se abre una conversación con nosotros con tu pedido y el total ya escritos."
           : "3️⃣ Tocá <b>Enviar pedido por WhatsApp</b> y se arma el mensaje con tu pedido y el total. También podés tocar <b>Copiar pedido</b> y pegarlo donde quieras.",
         "4️⃣ Nos lo mandás y te respondemos para coordinar la entrega. ¡Listo!",
+        "⏰ Tené en cuenta que los pedidos se hacen con <b>24 hs de anticipación</b>.",
       ],
       acciones: ["tienda", "carrito"],
     },

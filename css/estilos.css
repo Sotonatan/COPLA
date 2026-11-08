@@ -569,3 +569,11 @@ a.acceso[href]:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--az
 .tarjeta-pronto .tarjeta-etiqueta { background: var(--rosa); }
 .tarjeta-pronto .tarjeta-desc { margin-bottom: 4px; }
 .tarjeta-pronto:hover { box-shadow: 0 10px 0 var(--tono); }
+
+/* ---------- Aviso de 24 hs ---------- */
+.seccion-cabecera .aviso-anticipacion {
+  display: inline-flex; align-items: center; gap: 8px; margin: 16px 0 0;
+  background: var(--rosa); color: var(--blanco); border-radius: 999px;
+  padding: 8px 18px; font-weight: 500; font-size: .95rem;
+}
+.carrito-nota { margin: 0 0 8px; font-size: .82rem; font-weight: 500; }
