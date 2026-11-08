@@ -129,6 +129,19 @@
     });
   }
 
+  function pintarProximamente() {
+    const lista = window.COPLA_PROXIMAMENTE || [];
+    const seccion = $("[data-proximamente-seccion]");
+    if (!lista.length) { seccion.hidden = true; return; }
+    $("[data-proximamente]").innerHTML = lista.map((p) => `
+      <article class="tarjeta tarjeta-pronto color-${escapar(p.color || "azul")}">
+        <span class="tarjeta-etiqueta">Pronto</span>
+        <h3>${escapar(p.nombre)}</h3>
+        <div class="tarjeta-imagen con-foto">${p.foto ? `<img class="tarjeta-foto" src="${escapar(p.foto)}" alt="${escapar(p.nombre)}" loading="lazy">` : ""}</div>
+        <p class="tarjeta-desc">${escapar(p.descripcion || "")}</p>
+      </article>`).join("");
+  }
+
   function opcionElegida(tarjeta) {
     const activa = $(".opcion.activa", tarjeta);
     return activa ? parseInt(activa.dataset.opcion, 10) : 0;
@@ -380,6 +393,7 @@
   }
 
   pintarTienda();
+  pintarProximamente();
   pintarContacto();
   prepararEntrega();
   enlazarCarrito();

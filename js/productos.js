@@ -16,6 +16,10 @@
 
    Colores disponibles: "naranja", "rosa", "verde",
      "amarillo", "lima", "azul".
+
+   Al final está la lista PRÓXIMAMENTE: productos que se
+     muestran sin botón de compra. Para pasarlos a la tienda,
+     movelos a la lista de arriba y sumales "opciones".
    ========================================================== */
 window.COPLA_PRODUCTOS = [
   {
@@ -23,7 +27,7 @@ window.COPLA_PRODUCTOS = [
     nombre: "Empanadas",
     descripcion: "Caseras, de masa tierna y relleno generoso. Del freezer al horno en minutos.",
     color: "naranja",
-    foto: "",
+    foto: "img/productos/empanadas.jpg",
     copo: "img/copo/copo-empanada.png",
     etiqueta: "Favorita",
     // Sabores para elegir. Dejá la lista vacía [] si no hay opciones.
@@ -37,7 +41,7 @@ window.COPLA_PRODUCTOS = [
     nombre: "Pizzas y pizzetas",
     descripcion: "Masa casera y salsa de verdad. Para la cena de la semana o la juntada del finde.",
     color: "rosa",
-    foto: "",
+    foto: "img/productos/pizzas.jpg",
     copo: "img/copo/copo-pizza.png",
     etiqueta: "",
     sabores: ["Muzzarella", "Especial", "Fugazzeta", "Napolitana"],
@@ -47,11 +51,24 @@ window.COPLA_PRODUCTOS = [
     ],
   },
   {
+    id: "tartines",
+    nombre: "Tartines",
+    descripcion: "Tartas individuales bien doradas, listas para el horno. Una porción justa para cualquier día.",
+    color: "azul",
+    foto: "img/productos/tartines.jpg",
+    copo: "img/copo/copo-saludo.png",
+    etiqueta: "Nuevo",
+    sabores: ["Choclo", "Cebolla"],
+    opciones: [
+      { nombre: "x unidad", precio: null },
+    ],
+  },
+  {
     id: "hamburguesitas",
     nombre: "Hamburguesitas de verdura",
     descripcion: "Livianas, sabrosas y separadas una por una para cocinar solo las que necesitás.",
     color: "verde",
-    foto: "",
+    foto: "img/productos/hamburguesitas.jpg",
     copo: "img/copo/copo-hamburguesa.png",
     etiqueta: "",
     sabores: ["Lentejas", "Remolacha y lentejas", "Zanahoria y porotos"],
@@ -65,7 +82,7 @@ window.COPLA_PRODUCTOS = [
     nombre: "Chipacitos",
     descripcion: "Bien quesudos y doraditos. El mate nunca estuvo tan bien acompañado.",
     color: "amarillo",
-    foto: "",
+    foto: "img/productos/chipacitos.jpg",
     copo: "img/copo/copo-chipacitos.png",
     etiqueta: "",
     sabores: [],
@@ -75,30 +92,34 @@ window.COPLA_PRODUCTOS = [
     ],
   },
   {
-    id: "bomboncitos",
-    nombre: "Bomboncitos de banana",
-    descripcion: "Banana y chocolate en un bocado helado. Un mimo dulce para cualquier momento.",
+    id: "postres",
+    nombre: "Postres",
+    descripcion: "Vasitos individuales de 200 ml y bomboncitos de banana bañados en chocolate. Elegí tu antojo.",
     color: "lima",
-    foto: "",
-    copo: "img/copo/copo-saludo.png",
+    foto: "img/productos/postres.jpg",
+    copo: "img/copo/copo-postres.png",
     etiqueta: "",
     sabores: [],
     opciones: [
-      { nombre: "1 unidad · 150 g", precio: null },
-      { nombre: "3 unidades", precio: null },
+      { nombre: "Cheesecake · 200 ml", precio: null },
+      { nombre: "Chocotorta · 200 ml", precio: null },
+      { nombre: "Tiramisú · 200 ml", precio: null },
+      { nombre: "Bomboncitos de banana x3", precio: null },
     ],
   },
+];
+
+window.COPLA_PROXIMAMENTE = [
   {
-    id: "postres-vaso",
-    nombre: "Postres en vaso",
-    descripcion: "Vasitos individuales de 200 ml, listos para el antojo: elegí tu favorito o probalos todos.",
-    color: "lima",
-    foto: "",
-    copo: "img/copo/copo-postres.png",
-    etiqueta: "Nuevo",
-    sabores: ["Chocotorta", "Tiramisú", "Cheesecake de frutos rojos"],
-    opciones: [
-      { nombre: "Vaso individual · 200 ml", precio: null },
-    ],
+    nombre: "Yogurth natural",
+    descripcion: "Cremoso y casero, como el de la abuela.",
+    color: "rosa",
+    foto: "img/productos/yogurth.jpg",
+  },
+  {
+    nombre: "Condimentos",
+    descripcion: "Orégano, cúrcuma, pimentón, provenzal y nuez moscada.",
+    color: "azul",
+    foto: "img/productos/condimentos.jpg",
   },
 ];
