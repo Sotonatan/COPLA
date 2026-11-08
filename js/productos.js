@@ -52,13 +52,13 @@ window.COPLA_PRODUCTOS = [
   },
   {
     id: "tartines",
-    nombre: "Tartines",
-    descripcion: "Tartas individuales bien doradas, listas para el horno. Una porción justa para cualquier día.",
+    nombre: "Tartines de choclo",
+    descripcion: "Tartas individuales de choclo, bien doradas y listas para el horno. Una porción justa para cualquier día.",
     color: "azul",
     foto: "img/productos/tartines.jpg",
     copo: "img/copo/copo-saludo.png",
     etiqueta: "Nuevo",
-    sabores: ["Choclo", "Cebolla"],
+    sabores: [],
     opciones: [
       { nombre: "x unidad", precio: null },
     ],

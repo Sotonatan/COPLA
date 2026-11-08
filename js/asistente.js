@@ -68,7 +68,7 @@
       id: "productos",
       boton: "¿Qué venden?",
       respuesta: [
-        "Hacemos todo casero y congelado: empanadas, pizzas y pizzetas, tartines, hamburguesitas de verdura, chipacitos y postres 😋",
+        "Hacemos todo casero y congelado: empanadas, pizzas y pizzetas, tartines de choclo, hamburguesitas de verdura, chipacitos y postres 😋",
         "Y muy pronto se suman el yogurth natural y los condimentos.",
       ],
       acciones: ["tienda"],
