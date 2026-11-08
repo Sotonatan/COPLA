@@ -18,17 +18,30 @@
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
+  <!-- Copo de nieve reutilizable -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="copo-nieve" viewBox="-50 -50 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+        <path id="copo-brazo" d="M0 -6V-44M0 -24 -11 -35M0 -24 11 -35"/>
+        <use href="#copo-brazo" transform="rotate(60)"/>
+        <use href="#copo-brazo" transform="rotate(120)"/>
+        <use href="#copo-brazo" transform="rotate(180)"/>
+        <use href="#copo-brazo" transform="rotate(240)"/>
+        <use href="#copo-brazo" transform="rotate(300)"/>
+      </g>
+    </symbol>
+  </svg>
 
   <!-- Franja superior con copos de nieve -->
   <div class="franja" aria-hidden="true">
-    <span>✳</span><span>✳</span><span>✳</span><span>✳</span><span>✳</span><span>✳</span><span>✳</span>
+    <span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
   </div>
 
   <!-- Navegación -->
   <header class="nav-wrap">
     <nav class="nav" aria-label="Principal">
       <a href="#inicio" class="nav-logo" aria-label="COPLA, ir al inicio">
-        <img src="img/marca/copla-naranja.png" alt="COPLA" width="700" height="240">
+        <img src="img/marca/copla-azul.png" alt="COPLA" width="700" height="240">
       </a>
       <ul class="nav-links">
         <li><a href="#tienda">Tienda</a></li>
@@ -47,11 +60,11 @@
     <section class="hero" id="inicio">
       <div class="hero-texto">
         <span class="estrella" aria-hidden="true">
-          <svg viewBox="0 0 100 100"><path d="M50 0 58 34 88 12 66 42 100 50 66 58 88 88 58 66 50 100 42 66 12 88 34 58 0 50 34 42 12 12 42 34Z"/></svg>
+          <svg class="copo-nieve"><use href="#copo-nieve"/></svg>
         </span>
         <p class="hero-pre">Alimentos congelados caseros</p>
         <h1>Frescura que <em>abraza</em>, sabores que nos unen</h1>
-        <p class="hero-bajada">Empanadas, pizzas, hamburguesitas, chipacitos y postrecitos hechos como en casa. Los guardás en el freezer y están listos cuando vos lo estés.</p>
+        <p class="hero-bajada">Recetas caseras que esperan en tu freezer el momento justo. Vos ponés la mesa; nosotros, el sabor de siempre.</p>
         <a href="#tienda" class="boton boton-claro">Ver la tienda</a>
       </div>
       <div class="hero-imagen">
@@ -65,10 +78,10 @@
     <!-- Cinta en movimiento -->
     <div class="cinta" aria-hidden="true">
       <div class="cinta-track">
-        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="asistente">❄</span>
-        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="asistente">❄</span>
-        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="asistente">❄</span>
-        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="asistente">❄</span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="cinta-copo"><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="cinta-copo"><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="cinta-copo"><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Chipacitos</span><span>Postrecitos</span><span class="cinta-copo"><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
       </div>
     </div>
 
@@ -76,17 +89,17 @@
     <section class="tienda" id="tienda">
       <div class="seccion-cabecera">
         <p class="sobretitulo">Tienda</p>
-        <h2>Elegí, sumá al carrito <em>y listo</em></h2>
-        <p>Todo lo hacemos en casa y lo congelamos a −18 °C para que llegue a tu mesa con el sabor intacto.</p>
+        <h2>Tu freezer asegurando <em>buenos momentos</em></h2>
+        <p>Armá tu carrito y llega a tu mesa con el sabor intacto.</p>
       </div>
       <div class="grilla" id="grilla-productos">
         <!-- Las tarjetas se generan desde js/productos.js -->
       </div>
     </section>
 
-    <!-- Cómo pedir -->
+    <!-- Cómo comprar -->
     <section class="pasos" aria-labelledby="titulo-pasos">
-      <h2 id="titulo-pasos">Pedir es <em>re fácil</em></h2>
+      <h2 id="titulo-pasos">Tres pasos y <em>a disfrutar</em></h2>
       <ol>
         <li>
           <span class="paso-num">1</span>
@@ -111,7 +124,7 @@
       <div class="seccion-cabecera">
         <p class="sobretitulo">Retiro y entrega</p>
         <h2 id="titulo-zonas">¿Dónde está <em>tu pedido</em>?</h2>
-        <p>Si estás dentro de una de nuestras zonas, podés retirarlo o te lo llevamos gratis. La dirección exacta te la pasamos por WhatsApp cuando confirmamos el pedido.</p>
+        <p>Retiralo en uno de nuestros puntos o recibilo gratis si estás a 5 cuadras a la redonda.</p>
       </div>
       <div class="zonas-caja">
         <div class="mapa" id="mapa" role="img" aria-label="Mapa con las zonas de retiro y entrega gratis de COPLA">
@@ -126,24 +139,28 @@
       <div class="contacto-texto">
         <p class="sobretitulo">Contacto</p>
         <h2>¿Charlamos?</h2>
-        <p>¿Tenés dudas, querés hacer un pedido grande para un evento o simplemente saludar? Estamos para ayudarte, y Copo también, con la bufanda puesta.</p>
-        <ul class="contacto-datos">
+        <p>¡Nos encanta leerte! Si querés hacer un pedido, consultar por nuestros productos o preparar algo especial para compartir, escribinos. Copo ya está listo para recibirte. 🐻</p>
+        <ul class="contacto-accesos">
           <li data-wa-item>
-            <span class="dato-etiqueta">WhatsApp</span>
-            <a data-wa-link href="#" target="_blank" rel="noopener"><span data-wa-visible></span></a>
-          </li>
-          <li data-instagram-item>
-            <span class="dato-etiqueta">Instagram</span>
-            <a data-instagram-link href="#" target="_blank" rel="noopener"><span data-instagram-texto></span></a>
+            <a class="acceso" data-wa-link href="#" target="_blank" rel="noopener">
+              <span class="acceso-icono acceso-wa"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg></span>
+              <span class="acceso-texto"><span class="acceso-etiqueta">WhatsApp</span>¡Escribinos!</span>
+            </a>
           </li>
           <li>
-            <span class="dato-etiqueta">Entregas</span>
-            <span><span data-entregas-resumen></span> <a href="#zonas" class="dato-mapa">Ver mapa</a></span>
+            <a class="acceso" data-instagram-link href="#" target="_blank" rel="noopener">
+              <span class="acceso-icono acceso-ig"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg></span>
+              <span class="acceso-texto"><span class="acceso-etiqueta">Instagram</span><span data-instagram-texto>Seguinos</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="acceso" href="#zonas">
+              <span class="acceso-icono acceso-moto"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="2.8"/><circle cx="18.5" cy="17" r="2.8"/><path d="M8.3 17h6.2l2.2-6.5H20"/><path d="M14.5 17 12 10.5H8.5"/><path d="M3 10.5h5.5V7H5"/><path d="M15.5 6h2.2l1.2 4.5"/></g></svg></span>
+              <span class="acceso-texto"><span class="acceso-etiqueta">Entregas</span>Ver mapa</span>
+            </a>
           </li>
         </ul>
-        <p class="contacto-pronto" data-pronto hidden>Muy pronto vas a poder escribirnos por WhatsApp e Instagram. Mientras tanto, Copo te cuenta cómo hacer tu pedido.</p>
         <div class="contacto-botones">
-          <a data-wa-link data-wa-boton href="#" target="_blank" rel="noopener" class="boton boton-naranja">Escribinos por WhatsApp</a>
           <button type="button" class="boton boton-azul" data-abrir-asistente>Hablar con Copo</button>
         </div>
       </div>

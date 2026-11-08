@@ -39,8 +39,8 @@
       respuesta: () => {
         const zonas = COPLA.zonasRetiro ? COPLA.zonasRetiro().map((z) => z.nombre) : [];
         const lista = [];
-        if (zonas.length) lista.push(`📍 En ${escapar(COPLA.unirLista(zonas, "o"))} podés <b>retirar</b> tu pedido o te lo llevamos <b>gratis</b> si estás dentro de ${escapar(COPLA.textoZonaGratis())}. La dirección exacta te la pasamos por WhatsApp.`);
-        if (COPLA.hayDelivery && COPLA.hayDelivery()) lista.push("🛵 Si estás más lejos, también te lo llevamos. En ese caso el costo del envío corre por tu cuenta.");
+        if (zonas.length) lista.push(`📍 Tenemos dos puntos de entrega: ${escapar(COPLA.unirLista(zonas, "y"))}. Podés <b>retirar</b> tu pedido ahí o te lo llevamos <b>gratis</b> si estás a ${escapar(COPLA.textoZonaGratis())}.`);
+        if (COPLA.hayDelivery && COPLA.hayDelivery()) lista.push("🛵 ¿Estás más lejos? Igual llegamos con tu pedido, para que lo disfrutes sin moverte de casa.");
         if (!lista.length) lista.push("Contanos dónde estás cuando hagas tu pedido y coordinamos la entrega.");
         lista.push("En el carrito elegís retiro o envío, y el día y el horario los coordinamos con vos.");
         return lista;

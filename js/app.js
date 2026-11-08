@@ -298,23 +298,21 @@
   /* ---------- Contacto y pie ---------- */
   function pintarContacto() {
     const saludo = "¡Hola COPLA! Quería hacerles una consulta.";
-    const hayWhatsApp = numeroWhatsApp() !== "";
     $$("[data-wa-link]").forEach((a) => { a.href = linkWhatsApp(saludo); });
-    $$("[data-wa-visible]").forEach((s) => { s.textContent = CONFIG.whatsappVisible || `+${numeroWhatsApp()}`; });
-    $("[data-wa-item]").hidden = !hayWhatsApp;
-    $("[data-wa-boton]").hidden = !hayWhatsApp;
+    $("[data-wa-item]").hidden = numeroWhatsApp() === "";
 
+    // Instagram: el ícono se muestra siempre; el enlace se activa al cargar el usuario.
     const ig = String(CONFIG.instagram || "").replace(/^@/, "").trim();
+    const enlaceIg = $("[data-instagram-link]");
     if (ig) {
-      $("[data-instagram-link]").href = `https://instagram.com/${encodeURIComponent(ig)}`;
+      enlaceIg.href = `https://instagram.com/${encodeURIComponent(ig)}`;
       $("[data-instagram-texto]").textContent = `@${ig}`;
+    } else {
+      enlaceIg.removeAttribute("href");
+      enlaceIg.removeAttribute("target");
+      enlaceIg.classList.add("acceso-pronto");
+      $("[data-instagram-texto]").textContent = "Muy pronto";
     }
-    $("[data-instagram-item]").hidden = !ig;
-    const pronto = $("[data-pronto]");
-    pronto.hidden = hayWhatsApp && !!ig;
-    if (hayWhatsApp && !ig) pronto.textContent = "Muy pronto también vas a encontrarnos en Instagram.";
-
-    $("[data-entregas-resumen]").textContent = resumenEntregas();
     $("[data-anio]").textContent = new Date().getFullYear();
   }
 
@@ -337,14 +335,6 @@
     return items.slice(0, -1).join(", ") + ` ${conector} ` + items[items.length - 1];
   }
 
-  function resumenEntregas() {
-    const zonas = zonasRetiro().map((z) => z.nombre);
-    const partes = [];
-    if (zonas.length) partes.push(`Retiro y entrega gratis en ${unirLista(zonas, "o")} (${textoZonaGratis()}).`);
-    if (hayDelivery()) partes.push("Más lejos, delivery con envío a cargo del cliente.");
-    return partes.join(" ");
-  }
-
   // Formulario del carrito: retiro o delivery.
   function prepararEntrega() {
     const form = $("[data-carrito-form]");
@@ -362,7 +352,7 @@
     };
     const nombres = unirLista(zonas.map((z) => z.nombre), "o");
     $("[data-ayuda-envio]").textContent = zonas.length
-      ? `Gratis dentro de ${textoZonaGratis()} de ${nombres}.${hayDelivery() ? " Más lejos, el envío corre por tu cuenta." : ""}`
+      ? `Gratis dentro de ${textoZonaGratis()} de ${nombres}. Si estás más lejos, coordinamos el envío por WhatsApp.`
       : "";
     form.addEventListener("change", actualizar);
     actualizar();

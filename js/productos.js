@@ -26,9 +26,8 @@ window.COPLA_PRODUCTOS = [
     foto: "",
     copo: "img/copo/copo-empanada.png",
     etiqueta: "Favorita",
-    // Si querés que el cliente elija sabor, agregalos acá.
-    // Ejemplo: sabores: ["Carne", "Pollo", "Jamón y queso"],
-    sabores: [],
+    // Sabores para elegir. Dejá la lista vacía [] si no hay opciones.
+    sabores: ["Jamón y queso", "Cebolla y queso", "Soja", "Carne cortada a cuchillo"],
     opciones: [
       { nombre: "Bandeja x6", precio: null },
     ],
@@ -41,7 +40,7 @@ window.COPLA_PRODUCTOS = [
     foto: "",
     copo: "img/copo/copo-pizza.png",
     etiqueta: "",
-    sabores: [],
+    sabores: ["Muzzarella", "Especial", "Fugazzeta", "Napolitana"],
     opciones: [
       { nombre: "Pizza x unidad", precio: null },
       { nombre: "Pizzeta x unidad", precio: null },
@@ -55,7 +54,7 @@ window.COPLA_PRODUCTOS = [
     foto: "",
     copo: "img/copo/copo-hamburguesa.png",
     etiqueta: "",
-    sabores: [],
+    sabores: ["Lentejas", "Remolacha y lentejas", "Zanahoria y porotos"],
     opciones: [
       { nombre: "Bolsa x6", precio: null },
       { nombre: "Bolsa x12", precio: null },
@@ -85,22 +84,21 @@ window.COPLA_PRODUCTOS = [
     etiqueta: "",
     sabores: [],
     opciones: [
-      { nombre: "Envase con tapa", precio: null },
+      { nombre: "1 unidad · 150 g", precio: null },
+      { nombre: "3 unidades", precio: null },
     ],
   },
   {
     id: "postres-vaso",
     nombre: "Postres en vaso",
-    descripcion: "Porciones individuales listas para el antojo: elegí tu favorito o probalos todos.",
+    descripcion: "Vasitos individuales de 200 ml, listos para el antojo: elegí tu favorito o probalos todos.",
     color: "lima",
     foto: "",
     copo: "img/copo/copo-postres.png",
     etiqueta: "Nuevo",
-    sabores: [],
+    sabores: ["Chocotorta", "Tiramisú", "Cheesecake de frutos rojos"],
     opciones: [
-      { nombre: "Chocotorta", precio: null },
-      { nombre: "Tiramisú", precio: null },
-      { nombre: "Cheesecake de frutos rojos", precio: null },
+      { nombre: "Vaso individual · 200 ml", precio: null },
     ],
   },
 ];

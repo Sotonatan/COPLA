@@ -19,10 +19,9 @@ window.COPLA_CONFIG = {
   // Usuario de Instagram, sin "@". Dejalo vacío para ocultarlo.
   instagram: "",
 
-  // RETIRO Y ENTREGA GRATIS
-  // Cada zona se dibuja en el mapa como un círculo, sin mostrar la
-  // dirección exacta. Dentro del círculo se puede retirar el pedido o
-  // recibirlo gratis.
+  // PUNTOS DE ENTREGA
+  // Cada punto se marca en el mapa con un pin y un círculo alrededor.
+  // Dentro del círculo se puede retirar el pedido o recibirlo gratis.
   // Para mover una zona:
   //   1. Abrí Google Maps y hacé clic derecho sobre el lugar.
   //   2. Tocá los números que aparecen arriba (se copian).
@@ -31,14 +30,14 @@ window.COPLA_CONFIG = {
   entregas: {
     zonaGratis: "5 cuadras a la redonda",
     zonas: [
-      { nombre: "zona Perón", lat: -27.4438, lng: -58.9982, radio: 600 },
-      { nombre: "zona Ameghino", lat: -27.4650, lng: -58.9775, radio: 600 },
+      { nombre: "punto Perón", lat: -27.44377, lng: -58.99817, radio: 600 },
+      { nombre: "punto Ameghino", lat: -27.46497, lng: -58.97753, radio: 600 },
     ],
-    // Delivery fuera de las zonas: no se marca en el mapa.
+    // Delivery fuera de los círculos: no se marca en el mapa.
     // Poné activo: false para ocultarlo.
     delivery: {
       activo: true,
-      texto: "Fuera de estas zonas también te lo llevamos. El costo del envío corre por tu cuenta.",
+      texto: "¿Estás más lejos? Igual llegamos: pedí desde tu casa y recibí tu freezer lleno sin moverte del sillón.",
     },
   },
 
