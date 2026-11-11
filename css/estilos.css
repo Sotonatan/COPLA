@@ -129,13 +129,35 @@ em { font-style: italic; }
 
 .hero-imagen {
   position: relative; min-height: 420px;
-  background: var(--naranja); border-radius: calc(var(--radio) - 6px);
+  background: var(--crema); border-radius: calc(var(--radio) - 6px);
   overflow: hidden;
 }
-.hero-blob { position: absolute; border-radius: 50%; }
-.hero-blob-1 { width: 70%; aspect-ratio: 1; background: var(--rosa); left: -18%; top: -22%; }
-.hero-blob-2 { width: 55%; aspect-ratio: 1; background: var(--amarillo); right: -14%; bottom: -26%; }
-.hero-solluna { position: absolute; width: 72%; left: 50%; top: 50%; transform: translate(-50%, -54%); filter: drop-shadow(0 8px 14px rgba(8, 76, 115, .25)); }
+/* Mitad naranja con borde ondulado */
+.hero-ola { position: absolute; top: 0; right: 0; width: 46%; height: 100%; fill: var(--naranja); }
+/* Marco rosa ondulado con el sol y la luna */
+.hero-marco {
+  position: absolute; left: 50%; top: 50%; width: min(78%, 470px); aspect-ratio: 500 / 440;
+  transform: translate(-54%, -50%);
+}
+.hero-marco-forma {
+  position: absolute; inset: 0; width: 100%; height: 100%; fill: var(--rosa);
+  filter: drop-shadow(10px 12px 0 var(--azul));
+  animation: marco-flota 7s ease-in-out infinite;
+}
+@keyframes marco-flota { 50% { transform: rotate(-2.5deg) scale(1.015); } }
+.hero-solluna {
+  position: absolute; width: 74%; left: 50%; top: 50%; transform: translate(-50%, -53%);
+  filter: drop-shadow(0 6px 10px rgba(8, 76, 115, .3));
+}
+/* Copitos de nieve en lugar de estrellas */
+.hero-copo { position: absolute; display: block; animation: girar 16s linear infinite; }
+.hero-copo-1 { width: 54px; height: 54px; left: 5%; bottom: 9%; color: var(--rosa); }
+.hero-copo-2 { width: 28px; height: 28px; left: 3%; top: 42%; color: var(--naranja); animation-duration: 11s; animation-direction: reverse; }
+.hero-copo-3 { width: 26px; height: 26px; left: 7%; top: 10%; color: var(--azul); animation-duration: 13s; }
+.hero-copo-4 { width: 34px; height: 34px; right: 7%; bottom: 10%; color: var(--crema); animation-duration: 14s; animation-direction: reverse; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-marco-forma, .hero-copo { animation: none; }
+}
 .hero-sello {
   position: absolute; right: 6%; top: 8%;
   width: 96px; height: 96px; border-radius: 50%;
@@ -412,7 +434,7 @@ em { font-style: italic; }
   transition: transform .2s ease;
 }
 .asistente-boton:hover { transform: scale(1.06) rotate(-4deg); }
-.asistente-boton img { width: 82%; margin-bottom: -18%; }
+.asistente-boton .copo-saluda { width: 82%; margin-bottom: -18%; }
 .asistente.abierto .asistente-boton { transform: scale(.9); }
 
 .asistente-burbuja {
@@ -442,9 +464,30 @@ em { font-style: italic; }
   display: flex; align-items: center; gap: 12px;
   background: var(--azul); color: var(--crema); padding: 12px 14px;
 }
-.asistente-cabecera img {
-  width: 46px; height: 46px; border-radius: 50%; background: var(--verde);
-  object-fit: cover; object-position: top;
+.asistente-avatar {
+  flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--verde);
+  overflow: hidden;
+}
+
+/* Copo saluda con la manito */
+.copo-saluda { position: relative; display: block; width: 100%; aspect-ratio: 303 / 389; }
+.copo-saluda img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.copo-saluda-brazo { transform-origin: 42.2% 46.3%; animation: copo-saludo 3.6s ease-in-out infinite; }
+.copo-saluda-lineas { animation: copo-lineas 3.6s ease-in-out infinite; }
+@keyframes copo-saludo {
+  0%, 46%, 100% { transform: rotate(0); }
+  8%  { transform: rotate(-13deg); }
+  16% { transform: rotate(2deg); }
+  24% { transform: rotate(-13deg); }
+  34% { transform: rotate(0); }
+}
+@keyframes copo-lineas {
+  0%, 46%, 100% { opacity: 1; transform: none; }
+  8%, 24% { opacity: .35; transform: translate(-3%, -2%); }
+  16% { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .copo-saluda-brazo, .copo-saluda-lineas { animation: none; }
 }
 .asistente-nombre { margin: 0; font-family: var(--titulos); font-weight: 700; font-size: 1.25rem; line-height: 1.1; }
 .asistente-estado { margin: 0; font-size: .8rem; opacity: .8; }

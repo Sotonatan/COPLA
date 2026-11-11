@@ -9,7 +9,15 @@
   "use strict";
 
   const COPLA = window.COPLA || {};
-  const AVATAR = "img/copo/copo-saludo.png";
+
+  // Copo saludando: cuerpo, rayitas y brazo van en capas separadas
+  // para que la manito se mueva sola (la animación está en estilos.css).
+  const COPO_SALUDA = `
+    <span class="copo-saluda" aria-hidden="true">
+      <img src="img/copo/copo-saludo-cuerpo.png" alt="">
+      <img class="copo-saluda-lineas" src="img/copo/copo-saludo-lineas.png" alt="">
+      <img class="copo-saluda-brazo" src="img/copo/copo-saludo-brazo.png" alt="">
+    </span>`;
 
   const SALUDO = [
     "¡Hola! Soy Copo, el oso polar de COPLA 🐻‍❄️",
@@ -95,11 +103,11 @@
       <span>¡Hola! ¿Te ayudo con tu pedido?</span>
     </div>
     <button type="button" class="asistente-boton" data-asistente-boton aria-expanded="false" aria-controls="asistente-panel" aria-label="Abrir chat con Copo">
-      <img src="${AVATAR}" alt="">
+      ${COPO_SALUDA}
     </button>
     <section class="asistente-panel" id="asistente-panel" aria-label="Chat con Copo" aria-hidden="true">
       <header class="asistente-cabecera">
-        <img src="${AVATAR}" alt="">
+        <span class="asistente-avatar">${COPO_SALUDA}</span>
         <div>
           <p class="asistente-nombre">Copo</p>
           <p class="asistente-estado">Asistente de COPLA</p>
