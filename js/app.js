@@ -384,6 +384,8 @@
     unirLista,
     textoZonaGratis,
     hayWhatsApp: () => numeroWhatsApp() !== "",
+    linkWhatsApp,
+    precioTexto,
     unidadesEnCarrito: () => calcularTotales().unidades,
   };
 

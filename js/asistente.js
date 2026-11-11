@@ -29,6 +29,7 @@
   const PREGUNTAS = [
     {
       id: "comprar",
+      palabras: ["compr", "pedido", "pedir", "encarg", "como hago", "carrito", "orden"],
       boton: "¿Cómo compro?",
       respuesta: () => [
         "¡Es re fácil! Son 4 pasos:",
@@ -44,6 +45,7 @@
     },
     {
       id: "entregas",
+      palabras: ["entreg", "envio", "envian", "delivery", "retir", "zona", "donde", "llevan", "domicilio", "mapa", "barrio", "direccion"],
       boton: "¿Dónde entregan?",
       respuesta: () => {
         const zonas = COPLA.zonasRetiro ? COPLA.zonasRetiro().map((z) => z.nombre) : [];
@@ -58,6 +60,7 @@
     },
     {
       id: "precios",
+      palabras: ["precio", "cuanto", "cuesta", "salen", "sale", "valor", "cost", "$"],
       boton: "¿Y los precios?",
       respuesta: [
         "Cada producto muestra su precio en el botón <b>Agregar</b>, y en el carrito ves el total.",
@@ -67,6 +70,7 @@
     },
     {
       id: "conservar",
+      palabras: ["conserv", "freezer", "congel", "descongel", "dura", "vencim", "heladera", "guard"],
       boton: "¿Cómo los conservo?",
       respuesta: [
         "Guardalos en el freezer a <b>−18 °C</b> hasta el momento de cocinarlos ❄️",
@@ -75,6 +79,7 @@
     },
     {
       id: "productos",
+      palabras: ["venden", "tienen", "producto", "menu", "carta", "que hay", "variedad", "ofrecen", "hacen"],
       boton: "¿Qué venden?",
       respuesta: [
         "Hacemos todo casero y congelado: empanadas, pizzas y pizzetas, tartines, hamburguesitas de verdura, chipacitos y postres 😋",
@@ -84,11 +89,89 @@
     },
   ];
 
+  // Respuestas que solo aparecen cuando la persona escribe.
+  const CHARLA = [
+    { palabras: ["hola", "buenas", "buen dia", "buenos dias", "buenas tardes", "buenas noches"],
+      respuesta: ["¡Hola! 👋 Contame qué necesitás o elegí una de las preguntas de abajo."] },
+    { palabras: ["gracias", "genial", "perfecto", "buenisimo", "joya"],
+      respuesta: ["¡De nada! Cualquier otra cosa, acá estoy 🐻‍❄️"] },
+    { palabras: ["horario", "hora", "que dia", "cuando", "anticipacion", "demora", "tarda"],
+      respuesta: ["Los pedidos se hacen con <b>24 hs de anticipación</b> ⏰", "El día y el horario de entrega los coordinamos con vos por WhatsApp."],
+      acciones: ["whatsapp"] },
+    { palabras: ["tacc", "celiac", "gluten", "vegan", "vegetarian", "lactosa", "sin sal", "diabet", "azucar", "alergi", "ingrediente"],
+      prioridad: 3,
+      respuesta: ["Buena pregunta 🙌 Para eso preferimos responderte directo y con todo el detalle de cada producto.", "Tocá <b>Escribir por WhatsApp</b> y te contestamos."],
+      acciones: ["whatsapp"] },
+    { palabras: ["docena", "cumple", "evento", "fiesta", "por mayor", "mayorista", "cantidad", "especial", "a medida", "a gusto"],
+      prioridad: 2,
+      respuesta: ["¡Qué lindo! 🎉 Armamos pedidos a tu gusto, también para juntadas y eventos.", "Escribinos por WhatsApp y lo coordinamos con vos."],
+      acciones: ["whatsapp", "tienda"] },
+    { palabras: ["pago", "pagar", "transferencia", "efectivo", "mercado pago", "tarjeta", "alias", "cbu"],
+      respuesta: ["Los medios de pago te los pasamos cuando confirmamos tu pedido por WhatsApp 💳"],
+      acciones: ["whatsapp"] },
+  ];
+
   const ACCIONES = {
     tienda: { texto: "Ver la tienda", hacer: () => { cerrar(); document.getElementById("tienda").scrollIntoView({ behavior: "smooth" }); } },
     mapa: { texto: "Ver el mapa", hacer: () => { cerrar(); document.getElementById("zonas").scrollIntoView({ behavior: "smooth" }); } },
     carrito: { texto: "Abrir mi carrito", hacer: () => { cerrar(); COPLA.abrirCarrito && COPLA.abrirCarrito(); } },
+    whatsapp: { texto: "Escribir por WhatsApp", hacer: () => abrirWhatsApp(ultimaConsulta) },
   };
+
+  /* ---------- Entender lo que escriben ---------- */
+  const normalizar = (t) => String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[¿?¡!.,;:]/g, " ").replace(/\s+/g, " ").trim();
+  const puntaje = (texto, palabras) => (palabras || []).reduce((n, p) => n + (texto.includes(normalizar(p)) ? 1 : 0), 0);
+
+  // Busca si nombran un producto: por nombre, id o sabor.
+  function buscarProducto(texto) {
+    const lista = window.COPLA_PRODUCTOS || [];
+    return lista.find((p) => {
+      const claves = [p.id, p.nombre, ...(p.sabores || [])].map(normalizar).filter(Boolean);
+      return claves.some((c) => texto.includes(c) || c.split(" ").some((w) => w.length > 4 && texto.includes(w.replace(/s$/, ""))));
+    });
+  }
+
+  function respuestaProducto(p) {
+    const lista = [`¡Sí! Tenemos <b>${escapar(p.nombre)}</b> 😋`];
+    if (p.sabores && p.sabores.length) lista.push(`Sabores: ${escapar(COPLA.unirLista ? COPLA.unirLista(p.sabores, "y") : p.sabores.join(", "))}.`);
+    const precios = (p.opciones || []).map((o) =>
+      `${escapar(o.nombre)}: <b>${o.precio != null ? (COPLA.precioTexto ? COPLA.precioTexto(o.precio) : "$ " + o.precio) : "a confirmar"}</b>`);
+    if (precios.length) lista.push(precios.join("<br>"));
+    return lista;
+  }
+
+  let ultimaConsulta = "";
+
+  function abrirWhatsApp(consulta) {
+    const texto = consulta ? `¡Hola COPLA! Les quería consultar: ${consulta}` : "¡Hola COPLA! Les quería hacer una consulta.";
+    const link = COPLA.linkWhatsApp ? COPLA.linkWhatsApp(texto) : "https://wa.me/?text=" + encodeURIComponent(texto);
+    window.open(link, "_blank", "noopener");
+  }
+
+  async function responderTexto(original) {
+    if (ocupado) return;
+    const texto = normalizar(original);
+    if (!texto) return;
+    ultimaConsulta = original.trim();
+    opciones.innerHTML = "";
+    const preguntaMsj = agregarMensaje(escapar(original.trim()), "cliente");
+
+    const producto = buscarProducto(texto);
+    const candidatos = [...PREGUNTAS, ...CHARLA].map((q) => { const n = puntaje(texto, q.palabras); return { q, n: n ? n + (q.prioridad || 0) : 0 }; }).filter((c) => c.n > 0).sort((a, b) => b.n - a.n);
+    let respuesta, acciones;
+    if (producto && !candidatos.some((c) => c.q.prioridad) && !candidatos.some((c) => c.q.id === "entregas" || c.q.id === "conservar" || c.q.id === "comprar")) {
+      respuesta = respuestaProducto(producto); acciones = ["tienda"];
+    } else if (candidatos.length) {
+      const q = candidatos[0].q;
+      respuesta = typeof q.respuesta === "function" ? q.respuesta() : q.respuesta; acciones = q.acciones;
+    } else {
+      respuesta = ["Mmm, esa no la sé responder 🙈", "Pero las chicas de COPLA sí: tocá <b>Escribir por WhatsApp</b> y les llega tu consulta ya escrita."];
+      acciones = ["whatsapp"];
+    }
+    await decir(respuesta);
+    mostrarOpciones(acciones);
+    mensajes.scrollTop = Math.max(0, preguntaMsj.offsetTop - 8);
+  }
 
   function escapar(t) {
     return String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -116,6 +199,12 @@
       </header>
       <div class="asistente-mensajes" data-asistente-mensajes aria-live="polite"></div>
       <div class="asistente-opciones" data-asistente-opciones></div>
+      <form class="asistente-escribir" data-asistente-form autocomplete="off">
+        <input type="text" name="consulta" maxlength="300" placeholder="Escribí tu consulta…" aria-label="Escribí tu consulta" data-asistente-input>
+        <button type="submit" aria-label="Enviar consulta">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.4 21 12 3.4 3.6 3.4 10l12 2-12 2z" fill="currentColor"/></svg>
+        </button>
+      </form>
     </section>`;
   document.body.appendChild(raiz);
 
@@ -199,6 +288,16 @@
     // Deja visible el comienzo de la respuesta aunque las opciones ocupen lugar.
     mensajes.scrollTop = Math.max(0, preguntaMsj.offsetTop - 8);
   }
+
+  const form = $("[data-asistente-form]");
+  const entrada = $("[data-asistente-input]");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (ocupado) return;
+    const valor = entrada.value;
+    entrada.value = "";
+    responderTexto(valor);
+  });
 
   botonAbrir.addEventListener("click", () => (raiz.classList.contains("abierto") ? cerrar() : abrir()));
   $("[data-asistente-cerrar]").addEventListener("click", cerrar);
