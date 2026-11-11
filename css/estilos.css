@@ -289,7 +289,16 @@ em { font-style: italic; }
 .contacto-datos a { font-weight: 500; text-decoration: none; }
 .contacto-datos a:hover { text-decoration: underline; }
 .contacto-copo { display: grid; place-items: center; }
-.contacto-avatar { width: min(320px, 80%); border-radius: 50%; border: 4px solid var(--blanco); box-shadow: 0 10px 0 rgba(8, 76, 115, .18); }
+/* Copo hablando por celular: asoma la cabeza por encima del círculo */
+.contacto-circulo { position: relative; width: min(340px, 82%); aspect-ratio: 1; margin-top: 70px; }
+.contacto-circulo-fondo {
+  position: absolute; inset: 0; border-radius: 50%; overflow: hidden;
+  background: var(--azul); border: 4px solid var(--blanco);
+  box-shadow: 0 10px 0 rgba(8, 76, 115, .18);
+}
+.contacto-circulo img { position: absolute; left: 50%; bottom: -12%; width: 116%; max-width: none; transform: translateX(-50%); }
+.contacto-circulo-fondo img { bottom: calc(-12% - 4px); }
+.contacto-circulo-asoma { clip-path: inset(0 0 70% 0); pointer-events: none; }
 .cartel { position: relative; margin: 0; width: min(300px, 80%); }
 .cartel figcaption {
   position: absolute; left: 16%; right: 14%; top: 39%; height: 21%;
