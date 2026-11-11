@@ -10,11 +10,11 @@ window.COPLA_CONFIG = {
   // Mientras esté vacío, la sección Contacto avisa que el canal
   // llega pronto y el botón del carrito abre WhatsApp para que el
   // cliente elija a quién enviar el mensaje (también puede copiarlo).
-  whatsapp: "5493625320932",
+  whatsapp: "5493625323787",
 
   // Cómo se muestra el número en la sección Contacto.
   // Si lo dejás vacío se muestra el número tal cual.
-  whatsappVisible: "+54 9 362 532-0932",
+  whatsappVisible: "+54 9 362 532-3787",
 
   // Usuario de Instagram, sin "@". Dejalo vacío para ocultarlo.
   instagram: "coplacongelados",
