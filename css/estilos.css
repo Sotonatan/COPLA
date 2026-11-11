@@ -127,13 +127,10 @@ em { font-style: italic; }
 .hero h1 em { color: var(--naranja); }
 .hero-bajada { max-width: 34ch; margin: 18px 0 28px; font-size: 1.05rem; opacity: .9; }
 
-.hero-imagen {
-  position: relative; min-height: 420px;
-  background: var(--crema); border-radius: calc(var(--radio) - 6px);
-  overflow: hidden;
-}
-/* Mitad naranja con borde ondulado */
-.hero-ola { position: absolute; top: 0; right: 0; width: 46%; height: 100%; fill: var(--naranja); }
+.hero-imagen { position: relative; min-height: 440px; }
+/* Fondo partido en dos: azul con el texto y naranja con borde en ola */
+.hero-ola { position: absolute; top: 0; right: 0; width: 56%; height: 100%; fill: var(--naranja); }
+.hero-ola-movil { display: none; }
 /* Marco rosa ondulado con el sol y la luna */
 .hero-marco {
   position: absolute; left: 50%; top: 50%; width: min(78%, 470px); aspect-ratio: 500 / 440;
@@ -151,10 +148,10 @@ em { font-style: italic; }
 }
 /* Copitos de nieve en lugar de estrellas */
 .hero-copo { position: absolute; display: block; animation: girar 16s linear infinite; }
-.hero-copo-1 { width: 54px; height: 54px; left: 5%; bottom: 9%; color: var(--rosa); }
-.hero-copo-2 { width: 28px; height: 28px; left: 3%; top: 42%; color: var(--naranja); animation-duration: 11s; animation-direction: reverse; }
-.hero-copo-3 { width: 26px; height: 26px; left: 7%; top: 10%; color: var(--azul); animation-duration: 13s; }
-.hero-copo-4 { width: 34px; height: 34px; right: 7%; bottom: 10%; color: var(--crema); animation-duration: 14s; animation-direction: reverse; }
+.hero-copo-1 { width: 54px; height: 54px; left: 8%; bottom: 2%; color: var(--amarillo); }
+.hero-copo-2 { width: 28px; height: 28px; right: 2%; top: 44%; color: var(--azul); animation-duration: 11s; animation-direction: reverse; }
+.hero-copo-3 { width: 26px; height: 26px; left: 12%; top: 4%; color: var(--crema); animation-duration: 13s; }
+.hero-copo-4 { width: 34px; height: 34px; right: 4%; bottom: 6%; color: var(--crema); animation-duration: 14s; animation-direction: reverse; }
 @media (prefers-reduced-motion: reduce) {
   .hero-marco-forma, .hero-copo { animation: none; }
 }
@@ -388,7 +385,13 @@ em { font-style: italic; }
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; margin: 16px 16px 0; }
-  .hero-imagen { min-height: 340px; }
+  .hero-ola { display: none; }
+  .hero-imagen {
+    min-height: 400px; background: var(--naranja);
+    margin: 0 calc(-1 * clamp(28px, 5vw, 56px)) calc(-1 * clamp(28px, 5vw, 56px));
+  }
+  .hero-ola-movil { display: block; position: absolute; left: 0; top: -1px; width: 100%; height: 44px; fill: var(--azul); }
+  .hero-marco { top: 54%; }
   .contacto { grid-template-columns: 1fr; margin: 0 16px; }
   .pasos ol { grid-template-columns: 1fr; }
 }
