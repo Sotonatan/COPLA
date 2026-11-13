@@ -134,7 +134,7 @@
   function respuestaProducto(p) {
     const lista = [`¡Sí! Tenemos <b>${escapar(p.nombre)}</b> 😋`];
     if (p.sabores && p.sabores.length) lista.push(`Sabores: ${escapar(COPLA.unirLista ? COPLA.unirLista(p.sabores, "y") : p.sabores.join(", "))}.`);
-    if (p.armar) lista.push(`La ${escapar(p.opciones[0].nombre.toLowerCase())} la armás vos, con los gustos que más te gusten.`);
+    if (p.armar || (p.opciones || []).some((o) => o.armar)) lista.push("La armás vos, combinando los gustos que más te gusten.");
     const precios = (p.opciones || []).map((o) =>
       `${escapar(o.nombre)}: <b>${o.precio != null ? (COPLA.precioTexto ? COPLA.precioTexto(o.precio) : "$ " + o.precio) : "a confirmar"}</b>`);
     if (precios.length) lista.push(precios.join("<br>"));

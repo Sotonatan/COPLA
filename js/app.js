@@ -72,10 +72,11 @@
         ? `<div class="opciones" role="radiogroup" aria-label="Presentación">${p.opciones.map((o, i) =>
             `<button type="button" class="opcion${i === 0 ? " activa" : ""}" role="radio" aria-checked="${i === 0}" data-opcion="${i}">${escapar(o.nombre)}</button>`).join("")}</div>`
         : `<p class="opcion-unica">${escapar(p.opciones[0].nombre)}</p>`;
+      const meta = metaArmar(p, 0);
       const sabores = !(p.sabores && p.sabores.length) ? ""
-        : p.armar
-          ? `<div class="armar" data-armar="${p.armar}">
-              <p class="armar-titulo">Elegí tus ${p.armar} gustos <span class="armar-cuenta" data-armar-cuenta>0 de ${p.armar}</span></p>
+        : meta
+          ? `<div class="armar" data-armar="${meta}">
+              <p class="armar-titulo"><span data-armar-titulo>Elegí tus ${meta} gustos</span> <span class="armar-cuenta" data-armar-cuenta>0 de ${meta}</span></p>
               ${p.sabores.map((s, i) => `
                 <div class="armar-fila">
                   <span>${escapar(s)}</span>
@@ -131,6 +132,14 @@
         $$(".opcion", tarjeta).forEach((b) => { b.classList.remove("activa"); b.setAttribute("aria-checked", "false"); });
         botonOpcion.classList.add("activa");
         botonOpcion.setAttribute("aria-checked", "true");
+        const caja = $("[data-armar]", tarjeta);
+        if (caja) {
+          const producto = PRODUCTOS.find((p) => p.id === tarjeta.dataset.producto);
+          const meta = metaArmar(producto, opcionElegida(tarjeta));
+          caja.dataset.armar = meta;
+          $("[data-armar-titulo]", caja).textContent = `Elegí tus ${meta} gustos`;
+          if (armado(tarjeta).total > meta) $$("[data-armar-cant]", caja).forEach((o) => (o.textContent = "0"));
+        }
       } else if (e.target.closest("[data-mas]")) {
         cant = Math.min(cant + 1, 99);
       } else if (e.target.closest("[data-menos]")) {
@@ -168,6 +177,12 @@
         <div class="tarjeta-imagen con-foto">${p.foto ? `<img class="tarjeta-foto" src="${escapar(p.foto)}" alt="${escapar(p.nombre)}" loading="lazy">` : ""}</div>
         <p class="tarjeta-desc">${escapar(p.descripcion || "")}</p>
       </article>`).join("");
+  }
+
+  // Cuántas unidades se arman: la de la presentación elegida o la del producto.
+  function metaArmar(producto, i) {
+    const opcion = producto.opciones[i] || {};
+    return opcion.armar || producto.armar || 0;
   }
 
   // Cuántas eligió de cada gusto en los productos para armar (ej. media docena).

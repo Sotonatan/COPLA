@@ -86,10 +86,11 @@ window.COPLA_PRODUCTOS = [
     foto: "img/productos/hamburguesitas.jpg",
     copo: "img/copo/copo-hamburguesa.png",
     etiqueta: "",
-    sabores: ["Lentejas", "Remolacha y lentejas", "Zanahoria y porotos"],
+    sabores: ["Lenteja", "Arvejas", "Garbanzos", "Soja", "Quinoa"],
+    // Cada bolsa se arma con los gustos que la persona elija.
     opciones: [
-      { nombre: "Bolsa x6", precio: null },
-      { nombre: "Bolsa x12", precio: null },
+      { nombre: "Bolsa x6", precio: null, armar: 6 },
+      { nombre: "Bolsa x12", precio: null, armar: 12 },
     ],
   },
   {
