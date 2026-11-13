@@ -133,7 +133,7 @@ em { font-style: italic; }
 .hero-ola-movil { display: none; }
 /* El sol y la luna sobre el naranja; los ojos se miran entre sí */
 .hero-solluna {
-  position: absolute; left: 50%; top: 50%; width: min(92%, 560px); aspect-ratio: 680 / 520;
+  position: absolute; left: 50%; top: 50%; width: min(78%, 420px); aspect-ratio: 680 / 520;
   transform: translate(-50%, -48%);
   filter: drop-shadow(0 6px 10px rgba(8, 76, 115, .25));
 }
