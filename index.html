@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>COPLA · Alimentos congelados</title>
+  <meta name="description" content="COPLA, alimentos congelados caseros: empanadas, pizzas, tartines, medias tartas, hamburguesitas de verdura, chipacitos y postrecitos. Armá tu pedido y envialo por WhatsApp.">
+  <meta name="theme-color" content="#084C73">
+  <meta property="og:title" content="COPLA · Alimentos congelados">
+  <meta property="og:description" content="Frescura que abraza, sabores que nos unen.">
+  <meta property="og:image" content="img/marca/avatar-redes.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/marca/favicon-32.png">
+  <link rel="apple-touch-icon" href="img/marca/icono-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/leaflet.css?v=20261108j">
+  <link rel="stylesheet" href="css/estilos.css?v=20261113c">
+</head>
+<body>
+  <!-- Copo de nieve reutilizable -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="copo-nieve" viewBox="-50 -50 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+        <path id="copo-brazo" d="M0 -6V-44M0 -24 -11 -35M0 -24 11 -35"/>
+        <use href="#copo-brazo" transform="rotate(60)"/>
+        <use href="#copo-brazo" transform="rotate(120)"/>
+        <use href="#copo-brazo" transform="rotate(180)"/>
+        <use href="#copo-brazo" transform="rotate(240)"/>
+        <use href="#copo-brazo" transform="rotate(300)"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- Franja superior con copos de nieve -->
+  <div class="franja" aria-hidden="true">
+    <span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span><span><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
+  </div>
+
+  <!-- Navegación -->
+  <header class="nav-wrap">
+    <nav class="nav" aria-label="Principal">
+      <a href="#inicio" class="nav-logo" aria-label="COPLA, ir al inicio">
+        <img src="img/marca/copla-azul.png" alt="COPLA" width="700" height="240">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#tienda">Tienda</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><button type="button" class="nav-carrito" data-abrir-carrito aria-label="Abrir carrito">
+          <span class="nav-carrito-texto">Carrito</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 7a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="contador" data-contador hidden>0</span>
+        </button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Portada -->
+    <section class="hero" id="inicio">
+      <svg class="hero-ola" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M100.0 0.0 L6.0 0.0 L6.7 2.0 L7.5 4.0 L8.1 6.0 L8.7 8.0 L9.2 10.0 L9.6 12.0 L9.9 14.0 L10.0 16.0 L10.0 18.0 L9.8 20.0 L9.5 22.0 L9.1 24.0 L8.5 26.0 L7.9 28.0 L7.2 30.0 L6.5 32.0 L5.7 34.0 L5.0 36.0 L4.3 38.0 L3.6 40.0 L3.1 42.0 L2.6 44.0 L2.3 46.0 L2.1 48.0 L2.0 50.0 L2.1 52.0 L2.3 54.0 L2.6 56.0 L3.1 58.0 L3.6 60.0 L4.3 62.0 L5.0 64.0 L5.7 66.0 L6.5 68.0 L7.2 70.0 L7.9 72.0 L8.5 74.0 L9.1 76.0 L9.5 78.0 L9.8 80.0 L10.0 82.0 L10.0 84.0 L9.9 86.0 L9.6 88.0 L9.2 90.0 L8.7 92.0 L8.1 94.0 L7.5 96.0 L6.7 98.0 L6.0 100.0 L100.0 100.0Z"/>
+      </svg>
+      <div class="hero-texto">
+        <span class="estrella" aria-hidden="true">
+          <svg class="copo-nieve"><use href="#copo-nieve"/></svg>
+        </span>
+        <p class="hero-pre">Alimentos congelados</p>
+        <h1>Frescura que <em>abraza</em>, sabores que nos unen</h1>
+        <p class="hero-bajada">Recetas caseras que esperan en tu freezer el momento justo. Vos ponés la mesa; nosotros, el sabor de siempre.</p>
+        <a href="#tienda" class="boton boton-claro">Ver la tienda</a>
+      </div>
+      <div class="hero-imagen">
+        <svg class="hero-ola-movil" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0.0 0.0 L0.0 45.0 L2.0 50.6 L4.0 56.0 L6.0 61.1 L8.0 65.5 L10.0 69.3 L12.0 72.1 L14.0 74.1 L16.0 74.9 L18.0 74.8 L20.0 73.5 L22.0 71.3 L24.0 68.1 L26.0 64.1 L28.0 59.5 L30.0 54.3 L32.0 48.8 L34.0 43.1 L36.0 37.5 L38.0 32.2 L40.0 27.4 L42.0 23.1 L44.0 19.7 L46.0 17.1 L48.0 15.5 L50.0 15.0 L52.0 15.5 L54.0 17.1 L56.0 19.7 L58.0 23.1 L60.0 27.4 L62.0 32.2 L64.0 37.5 L66.0 43.1 L68.0 48.8 L70.0 54.3 L72.0 59.5 L74.0 64.1 L76.0 68.1 L78.0 71.3 L80.0 73.5 L82.0 74.8 L84.0 74.9 L86.0 74.1 L88.0 72.1 L90.0 69.3 L92.0 65.5 L94.0 61.1 L96.0 56.0 L98.0 50.6 L100.0 45.0 L100.0 0.0Z"/>
+        </svg>
+        <div class="hero-solluna" role="img" aria-label="El sol y la luna de COPLA tomados de la mano">
+          <img src="img/marca/sol-y-luna-ojos.png" alt="" width="680" height="520">
+          <span class="pupila pupila-sol" style="--x: 220.3; --y: 126.6"></span>
+          <span class="pupila pupila-sol" style="--x: 256.4; --y: 126.5"></span>
+          <span class="pupila pupila-luna" style="--x: 473.6; --y: 131.5"></span>
+          <span class="pupila pupila-luna" style="--x: 505.5; --y: 131.5"></span>
+        </div>
+        <svg class="hero-copo hero-copo-1" aria-hidden="true"><use href="#copo-nieve"/></svg>
+        <svg class="hero-copo hero-copo-2" aria-hidden="true"><use href="#copo-nieve"/></svg>
+        <svg class="hero-copo hero-copo-3" aria-hidden="true"><use href="#copo-nieve"/></svg>
+        <svg class="hero-copo hero-copo-4" aria-hidden="true"><use href="#copo-nieve"/></svg>
+        <span class="hero-sello">−18 °C</span>
+      </div>
+    </section>
+
+    <!-- Cinta en movimiento -->
+    <div class="cinta" aria-hidden="true">
+      <div class="cinta-track">
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Tartines</span><span>Medias tartas</span><span>Chipacitos</span><span>Postres</span><span class="cinta-copo"><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Tartines</span><span>Medias tartas</span><span>Chipacitos</span><span>Postres</span><span class="cinta-copo"><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Tartines</span><span>Medias tartas</span><span>Chipacitos</span><span>Postres</span><span class="cinta-copo"><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
+        <span>Empanadas</span><span>Pizzas</span><span>Hamburguesitas</span><span>Tartines</span><span>Medias tartas</span><span>Chipacitos</span><span>Postres</span><span class="cinta-copo"><svg class="copo-nieve"><use href="#copo-nieve"/></svg></span>
+      </div>
+    </div>
+
+    <!-- Tienda -->
+    <section class="tienda" id="tienda">
+      <div class="seccion-cabecera">
+        <p class="sobretitulo">Tienda</p>
+        <h2>Tu freezer asegurando <em>buenos momentos</em></h2>
+        <p>Armá tu carrito para hacer tu pedido y llega en 24 hs a tu mesa con el sabor intacto.</p>
+        <p class="aviso-anticipacion"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Los pedidos se hacen con 24 hs de anticipación</p>
+      </div>
+      <div class="grilla" id="grilla-productos">
+        <!-- Las tarjetas se generan desde js/productos.js -->
+      </div>
+    </section>
+
+    <!-- Próximamente -->
+    <section class="proximamente" id="proximamente" aria-labelledby="titulo-proximamente" data-proximamente-seccion>
+      <div class="seccion-cabecera">
+        <h2 id="titulo-proximamente">Próximamente</h2>
+      </div>
+      <div class="grilla grilla-proximamente" data-proximamente></div>
+    </section>
+
+    <!-- Cómo comprar -->
+    <section class="pasos" aria-labelledby="titulo-pasos">
+      <h2 id="titulo-pasos">Tres pasos y <em>a disfrutar</em></h2>
+      <ol>
+        <li>
+          <span class="paso-num">1</span>
+          <h3>Armá tu carrito</h3>
+          <p>Elegí tus productos, la presentación y la cantidad.</p>
+        </li>
+        <li>
+          <span class="paso-num">2</span>
+          <h3>Envialo por WhatsApp</h3>
+          <p>Te armamos el mensaje con tu pedido y el total. Solo tenés que tocar enviar.</p>
+        </li>
+        <li>
+          <span class="paso-num">3</span>
+          <h3>Coordinamos la entrega</h3>
+          <p>Te respondemos para confirmar el día y el lugar. ¡Y a disfrutar!</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Retiro y delivery -->
+    <section class="zonas-seccion" id="zonas" aria-labelledby="titulo-zonas">
+      <div class="seccion-cabecera">
+        <p class="sobretitulo">Retiro y entrega</p>
+        <h2 id="titulo-zonas">¿Dónde está <em>tu pedido</em>?</h2>
+        <p>Retiralo en uno de nuestros puntos o recibilo gratis si estás a 5 cuadras a la redonda.</p>
+      </div>
+      <div class="zonas-caja">
+        <div class="mapa" id="mapa" role="img" aria-label="Mapa con las zonas de retiro y entrega gratis de COPLA">
+          <p class="mapa-cargando">Cargando mapa…</p>
+        </div>
+        <ul class="zonas-leyenda" data-zonas-leyenda></ul>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contacto" id="contacto">
+      <div class="contacto-texto">
+        <p class="sobretitulo">Contacto</p>
+        <h2>¿Charlamos?</h2>
+        <p>¡Nos encanta leerte! Si querés hacer un pedido, consultar por nuestros productos o preparar algo especial para compartir, escribinos. Copo ya está listo para recibirte. 🐻</p>
+        <ul class="contacto-accesos">
+          <li data-wa-item>
+            <a class="acceso" data-wa-link href="#" target="_blank" rel="noopener">
+              <span class="acceso-icono acceso-wa"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg></span>
+              <span class="acceso-texto"><span class="acceso-etiqueta">WhatsApp</span>¡Escribinos!</span>
+            </a>
+          </li>
+          <li>
+            <a class="acceso" data-instagram-link href="#" target="_blank" rel="noopener">
+              <span class="acceso-icono acceso-ig"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg></span>
+              <span class="acceso-texto"><span class="acceso-etiqueta">Instagram</span><span data-instagram-texto>Seguinos</span></span>
+            </a>
+          </li>
+          <li data-facebook-item>
+            <a class="acceso" data-facebook-link href="#" target="_blank" rel="noopener">
+              <span class="acceso-icono acceso-fb"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5H16l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4A21 21 0 0 0 14.3 4c-2.3 0-3.8 1.4-3.8 3.9v2.6H8v3h2.5V21h3Z"/></svg></span>
+              <span class="acceso-texto"><span class="acceso-etiqueta">Facebook</span>Seguinos</span>
+            </a>
+          </li>
+          <li>
+            <a class="acceso" href="#zonas">
+              <span class="acceso-icono acceso-moto"><svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="2.8"/><circle cx="18.5" cy="17" r="2.8"/><path d="M8.3 17h6.2l2.2-6.5H20"/><path d="M14.5 17 12 10.5H8.5"/><path d="M3 10.5h5.5V7H5"/><path d="M15.5 6h2.2l1.2 4.5"/></g></svg></span>
+              <span class="acceso-texto"><span class="acceso-etiqueta">Entregas</span>Ver mapa</span>
+            </a>
+          </li>
+        </ul>
+        <div class="contacto-botones">
+          <button type="button" class="boton boton-azul" data-abrir-asistente>Hablar con Copo</button>
+        </div>
+      </div>
+      <div class="contacto-copo">
+        <div class="contacto-circulo">
+          <div class="contacto-circulo-fondo">
+            <img src="img/copo/copo-telefono.png" alt="Copo, el oso polar de COPLA, hablando por celular" width="640" height="654" loading="lazy">
+          </div>
+          <img class="contacto-circulo-asoma" src="img/copo/copo-telefono.png" alt="" width="640" height="654" loading="lazy" aria-hidden="true">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <img src="img/marca/sol-y-luna-crema.png" alt="" class="pie-solluna" width="680" height="520">
+    <img src="img/marca/copla-naranja.png" alt="COPLA" class="pie-logo" width="700" height="240">
+    <p class="pie-sub">Alimentos congelados</p>
+    <p class="pie-slogan">Frescura que abraza, sabores que nos unen.</p>
+    <p class="pie-legal">Conservar a −18 °C · © <span data-anio></span> COPLA</p>
+  </footer>
+
+  <!-- Botón flotante del carrito (celular) -->
+  <button type="button" class="carrito-flotante" data-abrir-carrito hidden>
+    Ver carrito · <span data-total-flotante></span>
+  </button>
+
+  <!-- Carrito -->
+  <div class="carrito-fondo" data-cerrar-carrito hidden></div>
+  <aside class="carrito" id="carrito" aria-label="Carrito" aria-hidden="true">
+    <div class="carrito-cabecera">
+      <h2>Tu carrito</h2>
+      <button type="button" class="carrito-cerrar" data-cerrar-carrito aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div class="carrito-vacio" data-carrito-vacio>
+      <img src="img/marca/sol-y-luna-turquesa.png" alt="" width="800" height="635">
+      <p>Tu carrito está vacío.<br>¡Te esperamos en la tienda!</p>
+      <button type="button" class="boton boton-azul" data-ir-tienda>Ir a la tienda</button>
+    </div>
+    <ul class="carrito-lista" data-carrito-lista></ul>
+    <div class="carrito-pie" data-carrito-pie hidden>
+      <form class="carrito-form" data-carrito-form>
+        <label>Tu nombre
+          <input type="text" name="nombre" autocomplete="name" placeholder="Ej.: Sofía">
+        </label>
+        <fieldset class="entrega-elegir">
+          <legend>¿Cómo lo querés recibir?</legend>
+          <label class="entrega-opcion"><input type="radio" name="entrega" value="retiro" checked> Retiro</label>
+          <label class="entrega-opcion"><input type="radio" name="entrega" value="envio"> Envío a domicilio</label>
+        </fieldset>
+        <label data-campo-retiro>Zona de retiro
+          <select name="retiro" data-select-retiro></select>
+        </label>
+        <label data-campo-delivery hidden>Dirección de entrega
+          <input type="text" name="direccion" autocomplete="street-address" placeholder="Calle, número y barrio">
+          <span class="campo-ayuda" data-ayuda-envio></span>
+        </label>
+        <label>Comentarios (opcional)
+          <textarea name="nota" rows="2" placeholder="Sabores, horarios, lo que necesites"></textarea>
+        </label>
+      </form>
+      <div class="carrito-total">
+        <span>Total</span>
+        <strong data-total>$ 0</strong>
+      </div>
+      <p class="carrito-nota">Recordá: los pedidos se hacen con 24 hs de anticipación.</p>
+      <p class="carrito-aviso" data-aviso-precio hidden>Algunos precios están a confirmar. Te pasamos el total final por WhatsApp.</p>
+      <button type="button" class="boton boton-wa" data-enviar>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5 0a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>
+        Enviar pedido por WhatsApp
+      </button>
+      <button type="button" class="boton boton-borde" data-copiar>Copiar pedido</button>
+      <button type="button" class="carrito-vaciar" data-vaciar>Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <div class="aviso-flotante" data-toast role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/config.js?v=20261111a"></script>
+  <script src="js/productos.js?v=20261113e"></script>
+  <script src="js/app.js?v=20261113d"></script>
+  <script src="js/mapa.js?v=20261108j"></script>
+  <script src="js/asistente.js?v=20261113b"></script>
+</body>
+</html>
