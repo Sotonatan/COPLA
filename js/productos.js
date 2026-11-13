@@ -31,9 +31,11 @@ window.COPLA_PRODUCTOS = [
     copo: "img/copo/copo-empanada.png",
     etiqueta: "Favorita",
     // Sabores para elegir. Dejá la lista vacía [] si no hay opciones.
-    sabores: ["Jamón y queso", "Cebolla y queso", "Soja", "Carne cortada a cuchillo"],
+    sabores: ["Jamón y queso", "Queso y cebolla", "Carne picada a cuchillo", "Pollo", "Soja"],
+    // "armar": la persona reparte esa cantidad entre los gustos que quiera.
+    armar: 6,
     opciones: [
-      { nombre: "Bandeja x6", precio: null },
+      { nombre: "Media docena", precio: null },
     ],
   },
   {
@@ -58,7 +60,20 @@ window.COPLA_PRODUCTOS = [
     foto: "img/productos/tartines.jpg",
     copo: "img/copo/copo-saludo.png",
     etiqueta: "Nuevo",
-    sabores: ["Choclo", "Espinaca"],
+    sabores: ["Atún", "Choclo", "Espinaca y queso"],
+    opciones: [
+      { nombre: "x unidad", precio: null },
+    ],
+  },
+  {
+    id: "medias-tartas",
+    nombre: "Medias tartas",
+    descripcion: "Los sabores de nuestros tartines en tamaño para compartir. Del freezer al horno y a la mesa.",
+    color: "naranja",
+    foto: "img/productos/medias-tartas.jpg",
+    copo: "img/copo/copo-saludo.png",
+    etiqueta: "Nuevo",
+    sabores: ["Atún", "Choclo", "Espinaca y queso", "Jamón y queso"],
     opciones: [
       { nombre: "x unidad", precio: null },
     ],
@@ -122,5 +137,11 @@ window.COPLA_PROXIMAMENTE = [
     descripcion: "Orégano, cúrcuma, pimentón, provenzal y nuez moscada.",
     color: "azul",
     foto: "img/productos/condimentos.jpg",
+  },
+  {
+    nombre: "Conservas",
+    descripcion: "Caseras y en frasco, para darle sabor a la picada o a cualquier comida.",
+    color: "naranja",
+    foto: "img/productos/conservas.jpg",
   },
 ];

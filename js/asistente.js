@@ -82,8 +82,8 @@
       palabras: ["venden", "tienen", "producto", "menu", "carta", "que hay", "variedad", "ofrecen", "hacen"],
       boton: "¿Qué venden?",
       respuesta: [
-        "Hacemos todo casero y congelado: empanadas, pizzas y pizzetas, tartines, hamburguesitas de verdura, chipacitos y postres 😋",
-        "Y muy pronto se suman el yogurth natural y los condimentos.",
+        "Hacemos todo casero y congelado: empanadas, pizzas y pizzetas, tartines, medias tartas, hamburguesitas de verdura, chipacitos y postres 😋",
+        "Y muy pronto se suman el yogurth natural, los condimentos y las conservas.",
       ],
       acciones: ["tienda"],
     },
@@ -134,6 +134,7 @@
   function respuestaProducto(p) {
     const lista = [`¡Sí! Tenemos <b>${escapar(p.nombre)}</b> 😋`];
     if (p.sabores && p.sabores.length) lista.push(`Sabores: ${escapar(COPLA.unirLista ? COPLA.unirLista(p.sabores, "y") : p.sabores.join(", "))}.`);
+    if (p.armar) lista.push(`La ${escapar(p.opciones[0].nombre.toLowerCase())} la armás vos, con los gustos que más te gusten.`);
     const precios = (p.opciones || []).map((o) =>
       `${escapar(o.nombre)}: <b>${o.precio != null ? (COPLA.precioTexto ? COPLA.precioTexto(o.precio) : "$ " + o.precio) : "a confirmar"}</b>`);
     if (precios.length) lista.push(precios.join("<br>"));

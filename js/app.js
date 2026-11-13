@@ -72,9 +72,21 @@
         ? `<div class="opciones" role="radiogroup" aria-label="Presentación">${p.opciones.map((o, i) =>
             `<button type="button" class="opcion${i === 0 ? " activa" : ""}" role="radio" aria-checked="${i === 0}" data-opcion="${i}">${escapar(o.nombre)}</button>`).join("")}</div>`
         : `<p class="opcion-unica">${escapar(p.opciones[0].nombre)}</p>`;
-      const sabores = p.sabores && p.sabores.length
-        ? `<label class="sabor">Sabor <select data-sabor>${p.sabores.map((s) => `<option>${escapar(s)}</option>`).join("")}</select></label>`
-        : "";
+      const sabores = !(p.sabores && p.sabores.length) ? ""
+        : p.armar
+          ? `<div class="armar" data-armar="${p.armar}">
+              <p class="armar-titulo">Elegí tus ${p.armar} gustos <span class="armar-cuenta" data-armar-cuenta>0 de ${p.armar}</span></p>
+              ${p.sabores.map((s, i) => `
+                <div class="armar-fila">
+                  <span>${escapar(s)}</span>
+                  <div class="cantidad cantidad-chica">
+                    <button type="button" data-armar-menos="${i}" aria-label="Una menos de ${escapar(s)}">−</button>
+                    <output data-armar-cant="${i}">0</output>
+                    <button type="button" data-armar-mas="${i}" aria-label="Una más de ${escapar(s)}">+</button>
+                  </div>
+                </div>`).join("")}
+            </div>`
+          : `<label class="sabor">Sabor <select data-sabor>${p.sabores.map((s) => `<option>${escapar(s)}</option>`).join("")}</select></label>`;
       return `
         <article class="tarjeta color-${escapar(p.color || "naranja")}" data-producto="${escapar(p.id)}">
           ${p.etiqueta ? `<span class="tarjeta-etiqueta">${escapar(p.etiqueta)}</span>` : ""}
@@ -106,7 +118,16 @@
       let cant = parseInt(salida.textContent, 10) || 1;
 
       const botonOpcion = e.target.closest("[data-opcion]");
-      if (botonOpcion) {
+      const armarMas = e.target.closest("[data-armar-mas]");
+      const armarMenos = e.target.closest("[data-armar-menos]");
+      if (armarMas || armarMenos) {
+        const i = (armarMas || armarMenos).dataset[armarMas ? "armarMas" : "armarMenos"];
+        const celda = $(`[data-armar-cant="${i}"]`, tarjeta);
+        const n = parseInt(celda.textContent, 10) || 0;
+        const { total, meta } = armado(tarjeta);
+        if (armarMas && total < meta) celda.textContent = n + 1;
+        if (armarMenos && n > 0) celda.textContent = n - 1;
+      } else if (botonOpcion) {
         $$(".opcion", tarjeta).forEach((b) => { b.classList.remove("activa"); b.setAttribute("aria-checked", "false"); });
         botonOpcion.classList.add("activa");
         botonOpcion.setAttribute("aria-checked", "true");
@@ -117,8 +138,14 @@
       } else if (e.target.closest("[data-agregar]")) {
         const producto = PRODUCTOS.find((p) => p.id === tarjeta.dataset.producto);
         const opcion = opcionElegida(tarjeta);
-        const sabor = $("[data-sabor]", tarjeta)?.value || "";
+        const mezcla = armado(tarjeta);
+        if (mezcla.meta && mezcla.total !== mezcla.meta) {
+          avisar(`Te faltan ${mezcla.meta - mezcla.total} para completar`);
+          return;
+        }
+        const sabor = mezcla.meta ? mezcla.texto : ($("[data-sabor]", tarjeta)?.value || "");
         agregar(producto.id, opcion, sabor, cant);
+        $$("[data-armar-cant]", tarjeta).forEach((o) => (o.textContent = "0"));
         cant = 1;
         avisar(`Sumaste ${producto.nombre} al carrito`);
         const boton = e.target.closest("[data-agregar]");
@@ -143,6 +170,21 @@
       </article>`).join("");
   }
 
+  // Cuántas eligió de cada gusto en los productos para armar (ej. media docena).
+  function armado(tarjeta) {
+    const caja = $("[data-armar]", tarjeta);
+    if (!caja) return { meta: 0, total: 0, texto: "" };
+    const producto = PRODUCTOS.find((p) => p.id === tarjeta.dataset.producto);
+    const partes = [];
+    let total = 0;
+    $$("[data-armar-cant]", caja).forEach((o) => {
+      const n = parseInt(o.textContent, 10) || 0;
+      total += n;
+      if (n) partes.push(`${n} ${producto.sabores[o.dataset.armarCant]}`);
+    });
+    return { meta: parseInt(caja.dataset.armar, 10), total, texto: partes.join(", ") };
+  }
+
   function opcionElegida(tarjeta) {
     const activa = $(".opcion.activa", tarjeta);
     return activa ? parseInt(activa.dataset.opcion, 10) : 0;
@@ -153,6 +195,15 @@
     const opcion = producto.opciones[opcionElegida(tarjeta)];
     const cant = parseInt($("[data-cantidad]", tarjeta).textContent, 10) || 1;
     $("[data-precio]", tarjeta).textContent = tienePrecio(opcion.precio) ? precioTexto(opcion.precio * cant) : precioTexto(null);
+    const { meta, total } = armado(tarjeta);
+    if (meta) {
+      const cuenta = $("[data-armar-cuenta]", tarjeta);
+      cuenta.textContent = `${total} de ${meta}`;
+      cuenta.classList.toggle("completa", total === meta);
+      $$("[data-armar-mas]", tarjeta).forEach((b) => (b.disabled = total >= meta));
+      $$("[data-armar-menos]", tarjeta).forEach((b) => (b.disabled = $(`[data-armar-cant="${b.dataset.armarMenos}"]`, tarjeta).textContent === "0"));
+      $("[data-agregar]", tarjeta).classList.toggle("incompleto", total !== meta);
+    }
   }
 
   /* ---------- Carrito: vista ---------- */

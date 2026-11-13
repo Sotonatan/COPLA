@@ -131,20 +131,28 @@ em { font-style: italic; }
 /* Fondo partido en dos: azul con el texto y naranja con borde en ola */
 .hero-ola { position: absolute; top: 0; right: 0; width: 56%; height: 100%; fill: var(--naranja); }
 .hero-ola-movil { display: none; }
-/* Marco rosa ondulado con el sol y la luna */
-.hero-marco {
-  position: absolute; left: 50%; top: 50%; width: min(78%, 470px); aspect-ratio: 500 / 440;
-  transform: translate(-54%, -50%);
-}
-.hero-marco-forma {
-  position: absolute; inset: 0; width: 100%; height: 100%; fill: var(--rosa);
-  filter: drop-shadow(10px 12px 0 var(--azul));
-  animation: marco-flota 7s ease-in-out infinite;
-}
-@keyframes marco-flota { 50% { transform: rotate(-2.5deg) scale(1.015); } }
+/* El sol y la luna sobre el naranja; los ojos se miran entre sí */
 .hero-solluna {
-  position: absolute; width: 74%; left: 50%; top: 50%; transform: translate(-50%, -53%);
-  filter: drop-shadow(0 6px 10px rgba(8, 76, 115, .3));
+  position: absolute; left: 50%; top: 50%; width: min(92%, 560px); aspect-ratio: 680 / 520;
+  transform: translate(-50%, -48%);
+  filter: drop-shadow(0 6px 10px rgba(8, 76, 115, .25));
+}
+.hero-solluna img { width: 100%; height: 100%; }
+.pupila {
+  position: absolute; left: calc(var(--x) / 680 * 100%); top: calc(var(--y) / 520 * 100%);
+  width: calc(9.5 / 680 * 100%); aspect-ratio: 1; border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.pupila-sol { background: var(--crema); animation: mirar-luna 6s ease-in-out infinite; }
+.pupila-luna { background: var(--naranja); animation: mirar-sol 6s ease-in-out infinite; }
+/* Al frente → se miran → vuelven al frente */
+@keyframes mirar-luna {
+  0%, 30%, 78%, 100% { transform: translate(-50%, -50%); }
+  38%, 70% { transform: translate(12%, -62%); }
+}
+@keyframes mirar-sol {
+  0%, 30%, 78%, 100% { transform: translate(-50%, -50%); }
+  38%, 70% { transform: translate(-98%, -64%); }
 }
 /* Copitos de nieve en lugar de estrellas */
 .hero-copo { position: absolute; display: block; animation: girar 16s linear infinite; }
@@ -153,7 +161,7 @@ em { font-style: italic; }
 .hero-copo-3 { width: 26px; height: 26px; left: 12%; top: 4%; color: var(--crema); animation-duration: 13s; }
 .hero-copo-4 { width: 34px; height: 34px; right: 4%; bottom: 6%; color: var(--crema); animation-duration: 14s; animation-direction: reverse; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-marco-forma, .hero-copo { animation: none; }
+  .pupila, .hero-copo { animation: none; }
 }
 .hero-sello {
   position: absolute; right: 6%; top: 8%;
@@ -240,6 +248,16 @@ em { font-style: italic; }
 .opcion.activa { background: var(--azul); color: var(--blanco); }
 .opcion-unica { margin: 0 0 16px; text-align: center; font-size: .88rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 500; }
 .sabor { display: flex; align-items: center; justify-content: center; gap: 8px; margin: -4px 0 16px; font-size: .9rem; }
+/* Armá tu media docena */
+.armar { margin: -4px 0 16px; padding: 12px 14px; border-radius: var(--radio-chico); background: rgba(255, 255, 255, .55); text-align: left; }
+.armar-titulo { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 0 0 8px; font-weight: 600; font-size: .92rem; }
+.armar-cuenta { font-size: .8rem; padding: 2px 10px; border-radius: 999px; background: var(--blanco); white-space: nowrap; }
+.armar-cuenta.completa { background: var(--azul); color: var(--crema); }
+.armar-fila { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 4px 0; font-size: .9rem; }
+.armar-fila + .armar-fila { border-top: 1px dashed rgba(8, 76, 115, .2); }
+.armar .cantidad-chica { width: 104px; flex: none; }
+.armar .cantidad button:disabled { opacity: .3; cursor: default; }
+.boton-agregar.incompleto { opacity: .55; }
 .sabor select { font: inherit; color: inherit; border: 1.5px solid var(--azul); border-radius: var(--radio-chico); padding: 5px 12px; background: var(--blanco); }
 
 .tarjeta-acciones { margin-top: auto; display: grid; gap: 10px; }
@@ -403,7 +421,7 @@ em { font-style: italic; }
     margin: 0 calc(-1 * clamp(28px, 5vw, 56px)) calc(-1 * clamp(28px, 5vw, 56px));
   }
   .hero-ola-movil { display: block; position: absolute; left: 0; top: -1px; width: 100%; height: 44px; fill: var(--azul); }
-  .hero-marco { top: 54%; }
+  .hero-solluna { top: 56%; }
   .contacto { grid-template-columns: 1fr; margin: 0 16px; }
   .pasos ol { grid-template-columns: 1fr; }
 }
