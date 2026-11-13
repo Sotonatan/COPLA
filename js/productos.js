@@ -32,10 +32,12 @@ window.COPLA_PRODUCTOS = [
     etiqueta: "Favorita",
     // Sabores para elegir. Dejá la lista vacía [] si no hay opciones.
     sabores: ["Jamón y queso", "Queso y cebolla", "Carne picada a cuchillo", "Pollo", "Soja"],
-    // "armar": la persona reparte esa cantidad entre los gustos que quiera.
-    armar: 6,
+    // "armar": en cada presentación la persona reparte esa cantidad
+    // entre los gustos que quiera. Cada una tiene su propio precio.
     opciones: [
-      { nombre: "Media docena", precio: null },
+      { nombre: "x6", precio: null, armar: 6 },
+      { nombre: "x12", precio: null, armar: 12 },
+      { nombre: "x24", precio: null, armar: 24 },
     ],
   },
   {

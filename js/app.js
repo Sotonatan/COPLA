@@ -76,7 +76,7 @@
       const sabores = !(p.sabores && p.sabores.length) ? ""
         : meta
           ? `<div class="armar" data-armar="${meta}">
-              <p class="armar-titulo"><span data-armar-titulo>Elegí tus ${meta} gustos</span> <span class="armar-cuenta" data-armar-cuenta>0 de ${meta}</span></p>
+              <p class="armar-titulo"><span data-armar-titulo>Repartí por gusto</span> <span class="armar-cuenta" data-armar-cuenta>0 de ${meta}</span></p>
               ${p.sabores.map((s, i) => `
                 <div class="armar-fila">
                   <span>${escapar(s)}</span>
@@ -137,7 +137,7 @@
           const producto = PRODUCTOS.find((p) => p.id === tarjeta.dataset.producto);
           const meta = metaArmar(producto, opcionElegida(tarjeta));
           caja.dataset.armar = meta;
-          $("[data-armar-titulo]", caja).textContent = `Elegí tus ${meta} gustos`;
+          
           if (armado(tarjeta).total > meta) $$("[data-armar-cant]", caja).forEach((o) => (o.textContent = "0"));
         }
       } else if (e.target.closest("[data-mas]")) {
