@@ -82,7 +82,7 @@
       palabras: ["venden", "tienen", "producto", "menu", "carta", "que hay", "variedad", "ofrecen", "hacen"],
       boton: "¿Qué venden?",
       respuesta: [
-        "Hacemos todo casero y congelado: empanadas, pizzas y pizzetas, tartines, medias tartas, hamburguesitas de verdura, chipacitos y postres 😋",
+        "Hacemos todo casero y congelado: empanadas, pizzas y pizzetas, tartines, medias tartas, hamburguesitas de verdura, falafel, chipacitos y postres 😋",
         "Y muy pronto se suman el yogurth natural, los condimentos y las conservas.",
       ],
       acciones: ["tienda"],

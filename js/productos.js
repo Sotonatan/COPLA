@@ -96,6 +96,19 @@ window.COPLA_PRODUCTOS = [
     ],
   },
   {
+    id: "falafel",
+    nombre: "Falafel",
+    descripcion: "Bocaditos caseros de garbanzo, en bolsa de 10 unidades.",
+    color: "azul",
+    foto: "img/productos/falafel.jpg",
+    copo: "img/copo/copo-saludo.png",
+    etiqueta: "Nuevo",
+    sabores: ["Garbanzo"],
+    opciones: [
+      { nombre: "x10 unidades", precio: null },
+    ],
+  },
+  {
     id: "chipacitos",
     nombre: "Chipacitos",
     descripcion: "Bien quesudos y doraditos. El mate nunca estuvo tan bien acompañado.",
