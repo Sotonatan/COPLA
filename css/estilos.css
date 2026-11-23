@@ -458,8 +458,8 @@ em { font-style: italic; }
 .boton-borde:hover { background: var(--crema); }
 
 /* ---------- Copo (chat) ---------- */
-/* Subido para dejar lugar al cartel "Powered by Netlify" de abajo a la derecha */
-.asistente { position: fixed; right: 18px; bottom: 70px; z-index: 45; }
+/* Bien por encima del cartel "Powered by Netlify" (abajo a la derecha) */
+.asistente { position: fixed; right: 18px; bottom: 100px; z-index: 45; }
 .asistente-boton {
   width: 96px; height: 96px; border-radius: 50%; padding: 0;
   background: var(--verde); border: 3px solid var(--azul);
@@ -472,8 +472,9 @@ em { font-style: italic; }
 .asistente.abierto .asistente-boton { transform: scale(.9); }
 
 .asistente-burbuja {
-  position: absolute; right: 4px; bottom: 110px; width: 220px;
-  background: var(--blanco); border: 2px solid var(--azul); border-radius: 18px 18px 4px 18px;
+  /* Pegada a Copo, a su izquierda, con la colita apuntándole */
+  position: absolute; right: 110px; bottom: 24px; width: 220px;
+  background: var(--blanco); border: 2px solid var(--azul); border-radius: 18px;
   padding: 12px 34px 12px 14px; font-size: .92rem; font-weight: 500; cursor: pointer;
   box-shadow: 0 6px 0 rgba(8, 76, 115, .12);
   animation: aparecer .35s ease;
@@ -482,11 +483,16 @@ em { font-style: italic; }
   position: absolute; top: 6px; right: 6px; width: 24px; height: 24px;
   border: 0; border-radius: 50%; background: transparent; font-size: .8rem;
 }
-@keyframes aparecer { from { opacity: 0; transform: translateY(8px); } }
+.asistente-burbuja::after {
+  content: ""; position: absolute; right: -9px; top: 50%; width: 14px; height: 14px;
+  background: var(--blanco); border-top: 2px solid var(--azul); border-right: 2px solid var(--azul);
+  transform: translateY(-50%) rotate(45deg); border-radius: 0 3px 0 0;
+}
+@keyframes aparecer { from { opacity: 0; transform: translateX(8px); } }
 
 .asistente-panel {
   position: absolute; right: 0; bottom: 112px;
-  width: min(370px, calc(100vw - 36px)); height: min(560px, calc(100vh - 212px));
+  width: min(370px, calc(100vw - 36px)); height: min(560px, calc(100vh - 242px));
   background: var(--crema); border: 2px solid var(--azul); border-radius: 24px;
   display: flex; flex-direction: column; overflow: hidden;
   box-shadow: 0 16px 40px rgba(8, 76, 115, .3);
@@ -565,10 +571,10 @@ em { font-style: italic; }
 .asistente-opcion-accion:hover { background: #d9542a; }
 
 @media (max-width: 640px) {
-  .asistente { right: 14px; bottom: 66px; }
+  .asistente { right: 14px; bottom: 92px; }
   .asistente-boton { width: 80px; height: 80px; }
-  .asistente-panel { bottom: 94px; height: min(540px, calc(100vh - 182px)); }
-  .asistente-burbuja { bottom: 92px; }
+  .asistente-panel { bottom: 94px; height: min(540px, calc(100vh - 208px)); }
+  .asistente-burbuja { right: 92px; bottom: 14px; width: min(200px, calc(100vw - 130px)); }
   .carrito-flotante { right: 108px; left: 14px; bottom: 76px; font-size: .82rem; letter-spacing: .04em; white-space: nowrap; padding: 14px 10px; }
 }
 
