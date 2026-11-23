@@ -403,7 +403,7 @@ em { font-style: italic; }
 }
 
 .aviso-flotante {
-  position: fixed; left: 50%; bottom: 84px; z-index: 60;
+  position: fixed; left: 50%; bottom: 136px; z-index: 60;
   transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
   background: var(--azul); color: var(--crema);
   padding: 10px 20px; border-radius: var(--radio-chico); font-size: .92rem;
@@ -458,7 +458,8 @@ em { font-style: italic; }
 .boton-borde:hover { background: var(--crema); }
 
 /* ---------- Copo (chat) ---------- */
-.asistente { position: fixed; right: 18px; bottom: 18px; z-index: 45; }
+/* Subido para dejar lugar al cartel "Powered by Netlify" de abajo a la derecha */
+.asistente { position: fixed; right: 18px; bottom: 70px; z-index: 45; }
 .asistente-boton {
   width: 96px; height: 96px; border-radius: 50%; padding: 0;
   background: var(--verde); border: 3px solid var(--azul);
@@ -485,7 +486,7 @@ em { font-style: italic; }
 
 .asistente-panel {
   position: absolute; right: 0; bottom: 112px;
-  width: min(370px, calc(100vw - 36px)); height: min(560px, calc(100vh - 160px));
+  width: min(370px, calc(100vw - 36px)); height: min(560px, calc(100vh - 212px));
   background: var(--crema); border: 2px solid var(--azul); border-radius: 24px;
   display: flex; flex-direction: column; overflow: hidden;
   box-shadow: 0 16px 40px rgba(8, 76, 115, .3);
@@ -564,11 +565,11 @@ em { font-style: italic; }
 .asistente-opcion-accion:hover { background: #d9542a; }
 
 @media (max-width: 640px) {
-  .asistente { right: 14px; bottom: 14px; }
+  .asistente { right: 14px; bottom: 66px; }
   .asistente-boton { width: 80px; height: 80px; }
-  .asistente-panel { bottom: 94px; height: min(540px, calc(100vh - 130px)); }
+  .asistente-panel { bottom: 94px; height: min(540px, calc(100vh - 182px)); }
   .asistente-burbuja { bottom: 92px; }
-  .carrito-flotante { right: 108px; left: 14px; bottom: 24px; font-size: .82rem; letter-spacing: .04em; white-space: nowrap; padding: 14px 10px; }
+  .carrito-flotante { right: 108px; left: 14px; bottom: 76px; font-size: .82rem; letter-spacing: .04em; white-space: nowrap; padding: 14px 10px; }
 }
 
 /* ---------- Retiro y delivery ---------- */
