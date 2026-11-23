@@ -73,7 +73,7 @@ Abrí `index.html` con doble clic en el navegador. No hace falta servidor.
 
 ## Dónde está publicada
 
-La web está en **https://coplacongelados.netlify.app/**. Netlify toma los archivos de la rama del repo y la actualiza sola cada vez que se sube un cambio (tarda uno o dos minutos).
+La web está en **https://coplacongelados.com.ar/** (también responde en https://coplacongelados.netlify.app/). Netlify toma los archivos de la rama del repo y la actualiza sola cada vez que se sube un cambio (tarda uno o dos minutos).
 
 Después de cambiar CSS o JS, subí el número `?v=` de los enlaces en `index.html` para que los navegadores no muestren la versión vieja.
 
