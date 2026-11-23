@@ -1,6 +1,6 @@
 // Configuración para publicar la web como sitio estático en Cloudflare.
 {
-  "name": "proyecto-copla",
+  "name": "copla",
   "compatibility_date": "2025-06-01",
   "assets": {
     "directory": "./"
